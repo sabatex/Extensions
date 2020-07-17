@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ntics\ntics.csproj" />
+    <ProjectReference Include="..\src\Extensions.csproj" />
   </ItemGroup>
 
 </Project>

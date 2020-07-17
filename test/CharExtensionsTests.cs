@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using ntics.ClassExtensions;
+using sabatex.Extensions.ClassExtensions;
 
 namespace ntics.tests
 {

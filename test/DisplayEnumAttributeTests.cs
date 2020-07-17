@@ -1,4 +1,4 @@
-using ntics.ComponentModel.DataAnnotations;
+using sabatex.Extensions.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
 using Xunit;
