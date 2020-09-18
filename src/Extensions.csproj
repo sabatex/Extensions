@@ -6,13 +6,9 @@
     <Authors>Serhiy Lakas</Authors>
     <Product>sabatex common library</Product>
     <Company>sabatex on git</Company>
-    <Description>Standart class extensions (Char,DateTime,Enum,String)
-Diagnostic (TraceListenerWithDateTime)
-Text (Encoding1251,EncodingProvider1251)
-
-</Description>
+    <Description>Standart class extensions (Char,DateTime,Enum,String) Diagnostic (TraceListenerWithDateTime) Text (Encoding1251,EncodingProvider1251)</Description>
     <Copyright>2019, Serhiy Lakas</Copyright>
-    <Version>3.1.4</Version>
+    <Version>3.1.5</Version>
     <PackageReleaseNotes>Packagge updated</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
