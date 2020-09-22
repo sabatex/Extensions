@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+// Copyrigth (c) Serhiy Lakas 2020
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -6,6 +10,10 @@ using System.Text;
 
 namespace sabatex.Extensions
 {
+    //
+    // Summary:
+    //     Represents a 128-bit unsigned integer.
+
     public struct UInt128: IComparable, IComparable<UInt128>, IEquatable<UInt128>
     {
         ulong h;
@@ -26,7 +34,11 @@ namespace sabatex.Extensions
             h = value.h;
             l = value.l;
         }
-        public  static UInt128 MaxValue =>new UInt128(18446744073709551615, 18446744073709551615);
+        //
+        // Summary:
+        //     Represents the largest possible value of an sabatex.Extensions.UInt128. This field is constant.
+        public static readonly UInt128 MaxValue = new UInt128(18446744073709551615, 18446744073709551615);
+        public static readonly UInt128 MinValue = new UInt128(0);
         public static implicit operator UInt128(ulong value)=> new UInt128(value);        
         public static explicit operator ulong(UInt128 value)=>value.l;
         public int CompareTo(UInt128 other)
