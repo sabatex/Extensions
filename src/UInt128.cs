@@ -14,10 +14,10 @@ namespace sabatex.Extensions
     // Summary:
     //     Represents a 128-bit unsigned integer.
 
-    public struct UInt128: IComparable, IComparable<UInt128>, IEquatable<UInt128>
+    public readonly struct UInt128: IComparable, IComparable<UInt128>, IEquatable<UInt128>
     {
-        ulong h;
-        ulong l;
+        readonly ulong h;
+        readonly ulong l;
         UInt128(ulong value)
         {
             h = 0;
@@ -37,7 +37,7 @@ namespace sabatex.Extensions
         //
         // Summary:
         //     Represents the largest possible value of an sabatex.Extensions.UInt128. This field is constant.
-        public static readonly UInt128 MaxValue = new UInt128(18446744073709551615, 18446744073709551615);
+        public static readonly UInt128 MaxValue = new UInt128(ulong.MaxValue, ulong.MaxValue);
         public static readonly UInt128 MinValue = new UInt128(0);
         public static implicit operator UInt128(ulong value)=> new UInt128(value);        
         public static explicit operator ulong(UInt128 value)=>value.l;
@@ -66,9 +66,12 @@ namespace sabatex.Extensions
             return r == 0 || r < 0;
         }
 
-        public static UInt128 operator >>(UInt128 uInt128, int count)
+        public static UInt128 operator >>(UInt128 value, int count)
         {
-            var result = uInt128;
+            if (count >=128) return 0;
+            if (count >=64) return value.h >> count;
+            return new UInt128(value.h >> count,value.h<<(64-count) | value.l >> count);
+ /*            var result = uInt128;
             for (int i =0;i<count;i++)
             {
                 result.l >>= 1;
@@ -76,19 +79,23 @@ namespace sabatex.Extensions
                 result.h >>= 1;
             }
 
-            return result;
+            return result; */
         }
-        public static UInt128 operator <<(UInt128 uInt128, int count)
+        public static UInt128 operator <<(UInt128 value, int count)
         {
-            var result = uInt128;
-            for (int i = 0; i < count; i++)
-            {
-                result.h <<= 1;
-                if ((result.l & 0x8000000000000000) > 0) result.h |= 1;
-                result.l <<= 1;
-            }
+            if (count >=128) return 0;
+            if (count >=64) return new UInt128(value.l << count,0);
+            return new UInt128(value.h << count | value.l >> (64-count),value.l << count);
+ 
+            // var result = uInt128;
+            // for (int i = 0; i < count; i++)
+            // {
+            //     result.h <<= 1;
+            //     if ((result.l & 0x8000000000000000) > 0) result.h |= 1;
+            //     result.l <<= 1;
+            // }
 
-            return result;
+            // return result;
         }
 
         public static UInt128 operator &(UInt128 a, UInt128 b) => new UInt128(a.h & b.h, a.l & b.l);
@@ -96,47 +103,44 @@ namespace sabatex.Extensions
         public static UInt128 operator ^(UInt128 a, UInt128 b) => new UInt128(a.h ^ b.h, a.l ^ b.l);
         public static UInt128 operator ++ (UInt128 value)
         {
-            var result = new UInt128(value);
-            result.l++;
-            if (result.l == 0) result.h++;
-            return result;
-
-        }
+            var l = value.l+1;
+            if (l == 0)
+                return  new UInt128(value.h,l);
+            else
+                return new UInt128(value.h+1,l);
+         }
         public static UInt128 operator --(UInt128 value)
         {
-            var result = new UInt128(value);
-            result.l--;
-            if (result.l >value.l) result.h--;
-            return result;
+            var l = value.l-1;
+            if (l == 0)
+                return  new UInt128(value.h,l);
+            else
+                return new UInt128(value.h-1,l);
         }
 
         public static UInt128 operator +(UInt128 a,UInt128 b)
         {
-            UInt128 result;
-            result.l = a.l + b.l;
-            if (result.l < a.l || result.l < b.l)
-                result.h = a.h + b.h + 1;
+            var l = a.l + b.l;
+            var h = a.h + b.h;
+            if (l <a.l || l < b.l)
+                return new UInt128(h + 1,l);
             else
-                result.h = a.h + b.h;
-            return result;
-
+                return new UInt128(h,l);
         }
 
         public static UInt128 operator -(UInt128 a, UInt128 b)
         {
-            UInt128 result;
-            result.l = a.l - b.l;
+            var l = a.l - b.l;
+            var h = a.h - b.h;
             if (a.l < b.l)
-                result.h = a.h - b.h - 1;
+                return new UInt128(h - 1,l);
             else
-                result.h = a.h - b.h;
-            return result;
-
+                return new UInt128(h,l);
         }
 
         public static UInt128 operator *(UInt128 a, UInt128 b)
         {
-            var result = new UInt128(0);
+            UInt128 result = 0;
             for (int i = 0;i<128;i++)
             {
                 if ((b & 1) > 0) result += a;
@@ -144,15 +148,6 @@ namespace sabatex.Extensions
                 b >>= 1;
             }
             return result;
-
-            
-            //var counter = new UInt128(b);
-            //while (counter != 0)
-            //{
-            //    result = result + a;
-            //    counter--;
-            //}
-            //return result;
         }
         public static (UInt128,UInt128) Div(UInt128 a, UInt128 b)
         {
@@ -196,14 +191,6 @@ namespace sabatex.Extensions
 
         public static UInt128 operator %(UInt128 a, UInt128 b) => Div(a,b).Item2;
  
- 
-        public void Add(ulong value)
-        {
-            ulong temp = l;
-            l += value;
-            if (l < temp && l < value) h++;
-        }
-
         public bool Equals(UInt128 other) => h == other.h && l == other.l;
         public override bool Equals(object obj) => Equals((UInt128)obj);
         public override int GetHashCode()
