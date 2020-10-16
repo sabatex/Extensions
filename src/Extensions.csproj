@@ -8,7 +8,7 @@
     <Company>sabatex on git</Company>
     <Description>Standart class extensions (Char,DateTime,Enum,String) Diagnostic (TraceListenerWithDateTime) Text (Encoding1251,EncodingProvider1251)</Description>
     <Copyright>2019, Serhiy Lakas</Copyright>
-    <Version>3.1.8</Version>
+    <Version>3.2.0-preview1</Version>
     <PackageReleaseNotes>Packagge updated</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
