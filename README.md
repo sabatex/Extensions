@@ -1,6 +1,6 @@
 # .NET Core Extensions
 
-[![License](https://img.shields.io/badge/license-MIT-red.svg)](https://raw.githubusercontent.com/sabatex/Extensions/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/sabatex/Extensions/blob/master/LICENSE.TXT)
 [![NuGet Badge](https://buildstats.info/nuget/RussianTransliterator)](https://www.nuget.org/packages/sabatex.Extensions/)
 
 
