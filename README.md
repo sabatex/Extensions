@@ -1,7 +1,7 @@
 # .NET Core Extensions
 
-[![License](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/sabatex/Extensions/blob/master/LICENSE.TXT)
-[![NuGet Badge](https://buildstats.info/nuget/RussianTransliterator)](https://www.nuget.org/packages/sabatex.Extensions/)
+[![MIT License](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/sabatex/Extensions/blob/master/LICENSE.TXT)
+[![NuGet Badge](https://buildstats.info/nuget/sabatex.Extensions)](https://www.nuget.org/packages/sabatex.Extensions/)
 
 
  - #Observable object with INotifyPropertyChanged implemented
