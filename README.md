@@ -1,4 +1,9 @@
-# Extensions
+# .NET Core Extensions
+
+[![License](https://img.shields.io/badge/license-MIT-red.svg)](https://raw.githubusercontent.com/sabatex/Extensions/master/LICENSE)
+[![NuGet Badge](https://buildstats.info/nuget/RussianTransliterator)](https://www.nuget.org/packages/sabatex.Extensions/)
+
+
  - #Observable object with INotifyPropertyChanged implemented
 
  - #UInt128 Represents a 128-bit unsigned integer
