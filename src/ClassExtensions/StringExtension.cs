@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace sabatex.Extensions.ClassExtensions
 {
@@ -54,7 +55,7 @@ namespace sabatex.Extensions.ClassExtensions
         public static string ToRussian(this string value)
         {
             StringBuilder s = new StringBuilder(value);
-            for (int i = 0;i < s.Length;i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 s[i] = s[i].UpperKeyToRus();
             }
@@ -89,7 +90,7 @@ namespace sabatex.Extensions.ClassExtensions
         public static string FromHeximal(this string value)
         {
             StringBuilder result = new StringBuilder();
-            if (value!=null)
+            if (value != null)
             {
                 var st = value.ToStringCollection(',');
                 foreach (string s in st)
@@ -97,7 +98,7 @@ namespace sabatex.Extensions.ClassExtensions
                     if (UInt16.TryParse(s, out ushort rs))
                         result.Append((char)rs);
                     else
-                        throw new Exception("System Error !!!"); 
+                        throw new Exception("System Error !!!");
                 }
             }
             return result.ToString();
@@ -110,7 +111,7 @@ namespace sabatex.Extensions.ClassExtensions
         /// <param name="value">string with decimal simbols</param>
         /// <param name="result">decimal value</param>
         /// <returns>true is succes</returns>
-        public static bool TryToDecimal(this string value,out decimal result)
+        public static bool TryToDecimal(this string value, out decimal result)
         {
             if (Decimal.TryParse(value, out result)) return true;
             if (Decimal.TryParse(value.Replace('.', ','), out result)) return true;
@@ -118,7 +119,249 @@ namespace sabatex.Extensions.ClassExtensions
 
         }
 
+        static readonly string[] ukrToLatinChars = new string[]
+        {
+            "A",//А
+            "B",//Б
+            "V",//В
+            "H",//Г
+            "D",//Д
+            "E",//Е
+            "Zh",//Ж
+            "Z",//З
+            "Y",//И
+            "I",//Й - last position
+            "K",//K
+            "L",//Л
+            "M",//M
+            "N",//H
+            "O",//O
+            "P",//П
+            "R",//Р
+            "S",//С
+            "T",//T
+            "U",//У
+            "F",//Ф
+            "Kh",//Х
+            "Ts",//Ц
+            "Ch",//Ч
+            "Sh",//Ш
+            "Shch",//Щ
+            "",//Ъ
+            "Y",//Ы
+            "",//Ь
+            "Е",//Э
+            "Iu",//Ю Yu
+            "Ia",//Я Ya
+            "a",//А
+            "b",//Б
+            "v",//В
+            "h",//Г
+            "d",//Д
+            "e",//Е
+            "zh",//Ж
+            "z",//З
+            "y",//И
+            "i",//Й - last position
+            "k",//K
+            "l",//Л
+            "m",//M
+            "n",//H
+            "o",//O
+            "p",//П
+            "r",//Р
+            "s",//С
+            "t",//T
+            "u",//У
+            "f",//Ф
+            "kh",//Х
+            "ts",//Ц
+            "ch",//Ч
+            "sh",//Ш
+            "shch",//Щ
+            "",//Ъ
+            "y",//Ы
+            "",//Ь
+            "e",//Э
+            "iu",//Ю Yu
+            "ia",//Я Ya
+            };
+        static readonly string[] ukrToLatinCharsFirst = new string[]
+        {
+            "A",//А
+            "B",//Б
+            "V",//В
+            "H",//Г
+            "D",//Д
+            "E",//Е
+            "Zh",//Ж
+            "Z",//З
+            "Y",//И
+            "Y",//Й 
+            "K",//K
+            "L",//Л
+            "M",//M
+            "N",//H
+            "O",//O
+            "P",//П
+            "R",//Р
+            "S",//С
+            "T",//T
+            "U",//У
+            "F",//Ф
+            "Kh",//Х
+            "Ts",//Ц
+            "Ch",//Ч
+            "Sh",//Ш
+            "Shch",//Щ
+            "",//Ъ
+            "Y",//Ы
+            "",//Ь
+            "Е",//Э
+            "Yu",//Ю Yu
+            "Ya",//Я Ya
+            "a",//А
+            "b",//Б
+            "v",//В
+            "h",//Г
+            "d",//Д
+            "e",//Е
+            "zh",//Ж
+            "z",//З
+            "y",//И
+            "y",//Й
+            "k",//K
+            "l",//Л
+            "m",//M
+            "n",//H
+            "o",//O
+            "p",//П
+            "r",//Р
+            "s",//С
+            "t",//T
+            "u",//У
+            "f",//Ф
+            "kh",//Х
+            "ts",//Ц
+            "ch",//Ч
+            "sh",//Ш
+            "shch",//Щ
+            "",//Ъ
+            "y",//Ы
+            "",//Ь
+            "e",//Э
+            "yu",//Ю Yu
+            "ya",//Я Ya
+        };
+
+ 
+        public static string TranslitFromUkraineToLatin(this string value)
+        {
+            
+            var result = new StringBuilder();
+            int i = 0;
+            bool isFirst = true;
+            string getFromTable(char c, int lastIndex)
+                {
+                    int index = (int)c - (int)'А';
+                    string s = isFirst ? ukrToLatinCharsFirst[index] : ukrToLatinChars[index];
+                    if (Char.IsLower(c)) return s;
+                    if (s.Length == 1) return s;
+                    if (lastIndex >= value.Length) return s.ToUpper(); // upper last simbol  
+                    if (char.IsUpper(value[lastIndex])) return s.ToUpper(); // last simbol is upper
+                    return s;
+                }
+
+            while (i < value.Length)
+            {
+                char c = value[i];
+                i++;
+                if (c == 'З')
+                {
+                        if (i<value.Length){
+                            if (value[i] == 'Г')
+                            {
+                                result.Append("ZGh");
+                                i++;
+                                isFirst = false;
+                                continue;
+                            }
+                            if (value[i] == 'г')
+                            {
+                                result.Append("Zgh");
+                                i++;
+                                isFirst = false;
+                                continue;
+                            }
+
+                        }
+                }   
+               if (c == 'з')
+                {
+                        if (i<value.Length){
+                            if (value[i] == 'Г')
+                            {
+                                result.Append("zGh");
+                                i++;
+                                isFirst = false;
+                                continue;
+                            }
+                            if (value[i] == 'г')
+                            {
+                                result.Append("zgh");
+                                i++;
+                                isFirst = false;
+                                continue;
+                            }
+                        }
+                }   
 
 
+
+                switch (c)
+                {
+                    case '’':
+                        continue;
+                    case ' ':
+                        result.Append(c);
+                        isFirst = true;
+                        continue;
+                    case 'Ґ':
+                        result.Append('G');
+                        break;
+                    case 'ґ':
+                        result.Append('g');
+                        break;
+                    case 'Є':
+                        result.Append(isFirst ? "Ye" : "Ie");
+                        break;
+                    case 'є':
+                        result.Append(isFirst ? "ye" : "ie");
+                        break;
+                    case 'Ї':
+                        result.Append(isFirst ? "Yi" : "I");
+                        break;
+                    case 'ї':
+                        result.Append(isFirst ? "yi" : "i");
+                        break;
+                    case 'І':
+                        result.Append('I');
+                        break;
+                    case 'і':
+                        result.Append('i');
+                        break;
+                       
+                    default:
+                        if (c >= 'А' && c <= 'я')
+                            result.Append(getFromTable(c, i));
+                        else 
+                           result.Append(c);
+                        break;
+                }
+                isFirst = false;
+            }
+            return result.ToString();
+        }
+            
     }
 }

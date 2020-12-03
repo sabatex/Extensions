@@ -2,7 +2,9 @@ name: publish to nuget
 on:
   push:
     branches:
-      - master # Default release branch
+      - v3.2.0-preview1
+    paths:
+      - 'src/Extensions.csproj'
 jobs:
   publish:
     name: build, pack & publish
