@@ -2,7 +2,7 @@ name: publish to nuget
 on:
   push:
     branches:
-      - v3.2.0-preview1
+      - v3.2.0
     paths:
       - 'src/Extensions.csproj'
 jobs:
