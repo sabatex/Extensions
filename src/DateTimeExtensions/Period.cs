@@ -78,13 +78,11 @@ namespace sabatex.Extensions.DateTimeExtensions
 
         public static bool operator ==(Period arg1, Period arg2)
         {
-            if (arg1 == null) return arg2 == null;
             return arg1.Equals(arg2);
         }
 
         public static bool operator !=(Period arg1, Period arg2)
         {
-            if (arg1 == null) return arg2 != null;
             return !arg1.Equals(arg2);
         }
 

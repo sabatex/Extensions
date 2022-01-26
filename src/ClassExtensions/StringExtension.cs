@@ -118,7 +118,6 @@ namespace sabatex.Extensions.ClassExtensions
             return false;
 
         }
-
         static readonly string[] ukrToLatinChars = new string[]
         {
             "A",//А
@@ -254,7 +253,7 @@ namespace sabatex.Extensions.ClassExtensions
             "ya",//Я Ya
         };
 
- 
+
         public static string TranslitFromUkraineToLatin(this string value)
         {
             
@@ -296,7 +295,7 @@ namespace sabatex.Extensions.ClassExtensions
 
                         }
                 }   
-               if (c == 'з')
+                if (c == 'з')
                 {
                         if (i<value.Length){
                             if (value[i] == 'Г')
