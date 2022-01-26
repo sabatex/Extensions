@@ -14,7 +14,6 @@
 	<AssemblyName>sabatex.Extensions</AssemblyName>
     <RootNamespace>sabatex.Extensions</RootNamespace>
  
- 
 	<PackageReleaseNotes>Packagge updated</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
