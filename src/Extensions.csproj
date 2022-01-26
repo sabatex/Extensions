@@ -23,7 +23,6 @@
     <AssemblyName>sabatex.Extensions</AssemblyName>
     <RootNamespace>sabatex.Extensions</RootNamespace>
     <PackageProjectUrl>https://github.com/sabatex/Extensions</PackageProjectUrl>
-
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
