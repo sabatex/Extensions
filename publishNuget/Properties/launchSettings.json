@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "publishNuget": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\serhi\\source\\repos\\sabatex\\WebApiDocumentsExcange\\Sabatex.Core\\src\\Sabatex.Core.csproj"
+    }
+  }
+}
