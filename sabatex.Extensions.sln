@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RadzenBlazor", "RadzenBlazo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.RadzenBlazor", "Sabatex.RadzenBlazor\Sabatex.RadzenBlazor.csproj", "{36457FAA-4019-43ED-85E5-5AB0A6919B21}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.RadzenBlazor.ServerSide", "Sabatex.RadzenBlazor.ServerSide\sabatex.RadzenBlazor.ServerSide.csproj", "{3B810062-CC7F-4429-BDE1-A855D5178701}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.BlazorHelper", "sabatex.BlazorHelper\sabatex.BlazorHelper.csproj", "{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,14 @@ Global
 		{36457FAA-4019-43ED-85E5-5AB0A6919B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36457FAA-4019-43ED-85E5-5AB0A6919B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36457FAA-4019-43ED-85E5-5AB0A6919B21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B810062-CC7F-4429-BDE1-A855D5178701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B810062-CC7F-4429-BDE1-A855D5178701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B810062-CC7F-4429-BDE1-A855D5178701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B810062-CC7F-4429-BDE1-A855D5178701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +85,8 @@ Global
 		{5E619414-9012-489E-8547-E71ED40FDCD6} = {19A5084F-6360-427B-914C-9D8BDAB42113}
 		{EFB5449D-A12C-43C6-92B3-4FFABF83846D} = {061CEFB1-CC76-443C-BCAF-62EE43936C9B}
 		{36457FAA-4019-43ED-85E5-5AB0A6919B21} = {5AB7CA5D-2837-4FBE-8583-0562D7A31062}
+		{3B810062-CC7F-4429-BDE1-A855D5178701} = {5AB7CA5D-2837-4FBE-8583-0562D7A31062}
+		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953} = {5AB7CA5D-2837-4FBE-8583-0562D7A31062}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {867279D4-3A58-4403-AF90-072696586C2C}
