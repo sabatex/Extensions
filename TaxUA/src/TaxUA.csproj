@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Version>3.1.4</Version>
+    <Authors>Serhiy Lakas</Authors>
+    <Description>Ukraine tax classes</Description>
+    <Copyright>2015, Serhiy Lakas</Copyright>
+    <Company>sabatex on git</Company>
+
+    <PackageReleaseNotes>Migration from ntics</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryUrl>https://github.com/sabatex/TaxUA.git</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageTags>C#</PackageTags>
+    <AssemblyName>sabatex.TaxUA</AssemblyName>
+    <RootNamespace>sabatex.TaxUA</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sabatex.Extensions" Version="3.1.4" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>

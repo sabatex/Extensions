@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.Extensions", "Exten
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.Extensions.Tests", "Extensions\test\sabatex.Extensions.Tests.csproj", "{B775E8FE-8807-4A8D-9E53-BF6E7DF53081}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TaxUA", "TaxUA", "{039BFCD8-B265-45EF-A7F1-5C960D32E792}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxUA", "TaxUA\src\TaxUA.csproj", "{75C7B287-C73D-4850-9AC3-47E104F5CB4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,10 @@ Global
 		{B775E8FE-8807-4A8D-9E53-BF6E7DF53081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B775E8FE-8807-4A8D-9E53-BF6E7DF53081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B775E8FE-8807-4A8D-9E53-BF6E7DF53081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75C7B287-C73D-4850-9AC3-47E104F5CB4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C7B287-C73D-4850-9AC3-47E104F5CB4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C7B287-C73D-4850-9AC3-47E104F5CB4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C7B287-C73D-4850-9AC3-47E104F5CB4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5FFE81DB-17B0-4863-A092-23DB1EE73F0C} = {6E3CDA58-2866-45B2-8E13-D93F0227951E}
 		{B775E8FE-8807-4A8D-9E53-BF6E7DF53081} = {6E3CDA58-2866-45B2-8E13-D93F0227951E}
+		{75C7B287-C73D-4850-9AC3-47E104F5CB4D} = {039BFCD8-B265-45EF-A7F1-5C960D32E792}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {867279D4-3A58-4403-AF90-072696586C2C}
