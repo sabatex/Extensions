@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="sabatex.WPF.Controls.ComboBoxWithButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:sabatex.WPF.Controls"
+             Name="comboxWithButton"
+             mc:Ignorable="d" 
+             d:DesignWidth="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox HorizontalAlignment="Stretch" Grid.Column="0"  ItemsSource="{Binding ElementName=comboxWithButton, Path=ItemsSource, Mode=TwoWay}" SelectedItem="{Binding ElementName=comboxWithButton,Path=SelectedItem}"  ></ComboBox>
+        <Border Grid.Column="1" BorderThickness="1" CornerRadius="2" Padding="1"
+                BorderBrush="{Binding ElementName=button,Path=BorderBrush,Mode=OneWay}"
+                Background="{Binding ElementName=button,Path=Background,Mode=OneWay}">
+            <Button x:Name="button" Click="Button_Click"  BorderThickness="0" HorizontalAlignment="Right"  >...</Button>
+        </Border>
+    </Grid>
+</UserControl>

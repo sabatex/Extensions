@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="sabatex.WPF.Controls.DateTimePeriod"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:sabatex.WPF.Controls"
+             mc:Ignorable="d" 
+             d:DesignWidth="400"
+             Name="dateTimePeriod">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <DatePicker SelectedDate="{Binding ElementName=dateTimePeriod, Path=BeginDate}"></DatePicker>
+        <Label Grid.Column="1">&lt;-&gt;</Label>
+        <DatePicker Grid.Column="2" SelectedDate="{Binding ElementName=dateTimePeriod, Path=EndDate}"></DatePicker>
+        <Button Grid.Column="3" Click="Button_Click"  Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">...</Button>
+    </Grid>
+</UserControl>

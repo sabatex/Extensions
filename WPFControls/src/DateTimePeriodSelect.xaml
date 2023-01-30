@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="sabatex.WPF.Controls.DateTimePeriodSelect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:sabatex.WPF.Controls"
+             mc:Ignorable="d" Name="dtselector">
+    <Grid Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <local:DateTimePeriod  Period="{Binding ElementName=dtselector,Path=Period,Mode=TwoWay}"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <RadioButton Content="Day" VerticalAlignment="Center"/>
+            <RadioButton Grid.Row="1" Content="Week" VerticalAlignment="Center"/>
+            <RadioButton Grid.Row="2" Content="Month" VerticalAlignment="Center"/>
+            <RadioButton Grid.Row="3" Content="Quarter" VerticalAlignment="Center"/>
+            <RadioButton Grid.Row="4" Content="Year" VerticalAlignment="Center"/>
+            <DatePicker Grid.Column="1"></DatePicker>
+            <DatePicker Grid.Row="1" Grid.Column="1"></DatePicker>
+            <DatePicker Grid.Row="2" Grid.Column="1"></DatePicker>
+            <DatePicker Grid.Row="3" Grid.Column="1"></DatePicker>
+            <DatePicker Grid.Row="4" Grid.Column="1"></DatePicker>
+        </Grid>
+    </Grid>
+</UserControl>

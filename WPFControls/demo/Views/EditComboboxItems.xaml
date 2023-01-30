@@ -1,0 +1,27 @@
+﻿<Window x:Class="WPF.Controls.Demo.Views.EditComboboxItems"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.Controls.Demo.Views"
+        mc:Ignorable="d"
+        Title="EditComboboxItems" Height="450" Width="800"
+        KeyDown="ListBox_KeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ToolBarPanel Grid.Row="0">
+            <ToolBar>
+                <Button Click="Button_Click">Add Item</Button>
+                <Button Click="Button_Click_1">Remove Item</Button>
+            </ToolBar>
+        </ToolBarPanel>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=ComboBoxItems}" AutoGenerateColumns="False" CanUserAddRows="False" Name="DG">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Value}" Width="*" CanUserResize="False" Header="Edit value"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
