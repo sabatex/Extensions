@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{6E3CDA58-2866-45B2-8E13-D93F0227951E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "Extensions\src\Extensions.csproj", "{5FFE81DB-17B0-4863-A092-23DB1EE73F0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.Extensions", "Extensions\src\Sabatex.Extensions.csproj", "{5FFE81DB-17B0-4863-A092-23DB1EE73F0C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.Extensions.Tests", "Extensions\test\sabatex.Extensions.Tests.csproj", "{B775E8FE-8807-4A8D-9E53-BF6E7DF53081}"
 EndProject

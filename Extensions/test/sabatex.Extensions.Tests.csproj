@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Extensions.csproj" />
+    <ProjectReference Include="..\src\Sabatex.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
