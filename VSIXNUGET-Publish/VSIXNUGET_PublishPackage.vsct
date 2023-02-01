@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+Copyright (c) Serhiy Lakas. All rights reserved. 
+THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+
+-->
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h"/>
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h"/>
+  <!--This header contains the image monikers for various images-->
+  <Include href="KnownImageIds.vsct"/>
+  
+  <Include href="CustomMoniker.vsct"/>
+  
+  <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+  <Commands package="guidVSIXNUGET_PublishPackage">
+    <Menus>
+      <Menu guid="guidMenuAndCommandsCmdSet" id="MyToolbar" priority="0x0001" type="Toolbar">        
+        <Strings>
+           <ButtonText>Publish to NUGET</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+      <Group guid="guidMenuAndCommandsCmdSet" id="MyMenuGroup" priority="0x600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+      </Group>
+      <Group guid="guidMenuAndCommandsCmdSet" id="MyMainToolbarGroup" priority="0x100">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_TOOL_STANDARD"/>
+      </Group>
+      <Group guid="guidMenuAndCommandsCmdSet" id="MyToolbarGroup" priority="0x100">
+        <Parent guid="guidMenuAndCommandsCmdSet" id="MyToolbar"/>
+      </Group>
+      <Group guid="guidMenuAndCommandsCmdSet" id="MyEditorCtxGroup" priority="0x600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
+      </Group>
+    </Groups>
+    
+	<Buttons>
+      <Button guid="guidMenuAndCommandsCmdSet" id="cmdidMyCommand" priority="0x100" type="Button">
+        <Parent guid="guidMenuAndCommandsCmdSet" id="MyMenuGroup"/>
+        <Icon guid="ImageCatalogGuid" id="GoToNext"/>
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>C# Command Sample</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidMenuAndCommandsCmdSet" id="cmdidMyGraph" priority="0x100" type="Button">
+        <Parent guid="guidMenuAndCommandsCmdSet" id="MyMainToolbarGroup"/>
+        <Icon guid="ImageCatalogGuid" id="GenericChart"/>
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>C# Sample Graph Command</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidMenuAndCommandsCmdSet" id="cmdidMyZoom" priority="0x100" type="Button">
+        <Parent guid="guidMenuAndCommandsCmdSet" id="MyToolbarGroup"/>
+        <Icon guid="ImageCatalogGuid" id="Search"/>
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>C# Sample Zoom Command</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidMenuAndCommandsCmdSet" id="cmdidDynamicTxt" priority="0x200" type="Button">
+        <Parent guid="guidMenuAndCommandsCmdSet" id="MyMenuGroup"/>
+        <CommandFlag>TextChanges</CommandFlag>
+        <Strings>
+          <ButtonText>C# Text Changes</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidMenuAndCommandsCmdSet" id="cmdidDynVisibility1" priority="0x300" type="Button">
+        <Parent guid="guidMenuAndCommandsCmdSet" id="MyMenuGroup"/>
+        <Icon guid="CustomMoniker" id="Application"/>
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>C# Dynamic Visibility 1</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidMenuAndCommandsCmdSet" id="cmdidDynVisibility2" priority="0x300" type="Button">
+        <Parent guid="guidMenuAndCommandsCmdSet" id="MyMenuGroup"/>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>C# Dynamic Visibility 2</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <CommandPlacements>
+    <!--Here we place two commands inside the empty menu group we created in the Groups section.-->
+    <CommandPlacement guid="guidMenuAndCommandsCmdSet" id="cmdidMyCommand" priority="0x100">
+      <Parent guid="guidMenuAndCommandsCmdSet" id="MyEditorCtxGroup"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidMenuAndCommandsCmdSet" id="cmdidMyZoom" priority="0x200">
+      <Parent guid="guidMenuAndCommandsCmdSet" id="MyEditorCtxGroup"/>
+    </CommandPlacement>
+
+    <!--Now we place a previously defined group inside the Solution Explorer's toolbar.-->
+    <CommandPlacement guid="guidMenuAndCommandsCmdSet" id="MyToolbarGroup" priority="0x600">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_TOOL_PROJWIN"/>
+    </CommandPlacement>
+  </CommandPlacements>
+
+  <KeyBindings>
+    <KeyBinding guid="guidMenuAndCommandsCmdSet" id="cmdidMyCommand" editor="guidVSStd97" key1="1" mod1="Control" />
+  </KeyBindings>
+
+	
+  <Symbols>
+    <GuidSymbol name="guidVSIXNUGET_PublishPackage" value="{1870a603-92c2-4ab6-ab80-9f01f1d76dee}" />
+    <GuidSymbol name="guidMenuAndCommandsCmdSet" value="{19492BCB-32B3-4EC3-8826-D67CD5526653}">
+      <IDSymbol name="MyToolbar" value="0x101" />
+      <IDSymbol name="MyMenuGroup" value="0x1010" />
+      <IDSymbol name="MyToolbarGroup" value="0x1011" />
+      <IDSymbol name="MyMainToolbarGroup" value="0x1012" />
+      <IDSymbol name="MyEditorCtxGroup" value="0x1013" />
+      <IDSymbol name="cmdidMyCommand" value="0x2001" />
+      <IDSymbol name="cmdidMyGraph" value="0x2002" />
+      <IDSymbol name="cmdidMyZoom" value="0x2003" />
+      <IDSymbol name="cmdidDynamicTxt" value="0x2004" />
+      <IDSymbol name="cmdidDynVisibility1" value="0x2005" />
+      <IDSymbol name="cmdidDynVisibility2" value="0x2006" />
+    </GuidSymbol>
+	
+  </Symbols>
+</CommandTable>
