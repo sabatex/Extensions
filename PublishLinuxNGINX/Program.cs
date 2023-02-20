@@ -1,6 +1,4 @@
-﻿using CommandLine;
-using publishNuget;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 
 namespace PublishLinuxNGINX;
@@ -38,14 +36,10 @@ internal class Program
 
     static void Initialize(string[] args)
     {
-        var cmd = Parser.Default.ParseArguments<Options>(args);
-        if (cmd.Errors.Count() != 0)
-        {
-            foreach (var error in cmd.Errors)
-                Console.WriteLine(error);
-            throw new Exception();
-        }
-        projectFilePath = cmd.Value.FileName;
+        if (args.Length != 1)
+            throw new Exception("The command line args must pass full path project file *.csproj");
+
+        projectFilePath = args[0];
         // check file exist
         if (!File.Exists(projectFilePath))
             throw new Exception($"The file {projectFilePath} not exist!");

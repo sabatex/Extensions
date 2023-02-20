@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text.Json;
 
 namespace CommonLibrary;
 
@@ -11,10 +12,9 @@ public class ProjectConfig
     public readonly string OutputPath;
     public readonly string BuildConfiguration;
     
-    public readonly string? NugetKeyPath;
+    public readonly System.Text.Json.JsonDocument jsonDocument = System.Text.Json.JsonDocument.Parse("{}");
 
-
-	public ProjectConfig(string? projectFilePath)
+    public ProjectConfig(string? projectFilePath)
 	{
 		if (projectFilePath == null)
 			throw new ArgumentNullException();
@@ -39,10 +39,23 @@ public class ProjectConfig
         IsPreRelease= ver.IsPreRelease;
         BuildConfiguration = IsPreRelease ?"Debug" : "Release";
         OutputPath = ProjectFolderPath + "\\bin\\" + BuildConfiguration;
-
-
-        NugetKeyPath = xml.SelectSingleNode("Project/PropertyGroup/SabatexNugetKeyPath")?.InnerText;
+        var configFile = $"{ProjectFolderPath}/SabatexSettings.json";
+        if (File.Exists(configFile))
+        {
+            jsonDocument = System.Text.Json.JsonDocument.Parse(File.ReadAllText(configFile));
+        }
     }
+
+    public T? GetValue<T>(string key)
+    {
+        if (jsonDocument.RootElement.TryGetProperty(key,out var item))
+        {
+            return item.Deserialize<T>();
+        }
+        return default(T);
+    }
+
+
     public bool RunScript(string script)
     {
         var proc = new Process();
