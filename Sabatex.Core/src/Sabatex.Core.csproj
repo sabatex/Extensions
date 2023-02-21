@@ -3,10 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
 	<OutputType>Library</OutputType>
+	<Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
 	<IsPackable>true</IsPackable>
 	<PackageId>Sabatex.Core</PackageId>
 	<Product>Sabatex.Core</Product>
-	<Version>1.1.0</Version>
+	<Version>1.1.0-alpha3</Version>
 	<Authors>Serhiy Lakas</Authors>
 	<Copyright>Serhiy Lakas</Copyright>
 	<Description>base definitions for Sabatex</Description>
@@ -17,9 +19,7 @@
 	<RepositoryUrl>https://github.com/sabatex/WebApiDocumentsExcange</RepositoryUrl>
 
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-	<NeutralLanguage>en-US</NeutralLanguage>
+ 	<NeutralLanguage>en-US</NeutralLanguage>
 	
 	<Company>sabatex on git</Company>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -27,8 +27,20 @@
 	
 	
   </PropertyGroup>
+
   <ItemGroup>
-	<None Include="README.md" Pack="true" PackagePath="\"/>
+    <None Remove="SabatexSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SabatexSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
