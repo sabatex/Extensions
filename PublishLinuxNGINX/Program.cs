@@ -1,97 +1,42 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.Extensions.Configuration;
+using PublishLinuxNGINX;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Text.Json;
 
 
-namespace PublishLinuxNGINX;
+//string linuxProjectFolder=string.Empty;
+//string tarFilePath= string.Empty;
+//string tempFolder= string.Empty;
+//string tempProjectFolder=string.Empty;
+//string linuxWebFolder=string.Empty;
+//string? serviceName = null;
+//string? contentSubfolder= null;
+//bool isServiceEnable = false;
 
-internal class Program
-{
-    static string projectFilePath = string.Empty;
-    static string projectFolder = string.Empty;
-    static string projectName = string.Empty;
-    static string tarFileName= string.Empty;
-    static string bitviseTlpFile= string.Empty;
-    static string linuxTempFolder= string.Empty;
-    static string linuxProjectFolder=string.Empty;
-    static string tarFilePath= string.Empty;
-    static string tempFolder= string.Empty;
-    static string tempProjectFolder=string.Empty;
-    static string linuxWebFolder=string.Empty;
-    static string? serviceName = null;
-    static string? contentSubfolder= null;
-    static void setFolderPath(ref string value, string? folderName)
-    {
-        if (folderName == null)
-        {
-            Console.WriteLine($"The value folderName is null");
-            Environment.Exit(1);
-        }
 
-        if (!Directory.Exists(folderName))
-        {
-            Console.WriteLine($"The directory {folderName} is not exist!");
-            Environment.Exit(1);
-        }
-        value = folderName;
-    }
 
-    static void Initialize(string[] args)
-    {
-        if (args.Length != 1)
-            throw new Exception("The command line args must pass full path project file *.csproj");
+if (args.Length != 1)
+    throw new Exception("The command line args must pass full path project file *.csproj");
+NGINXPublish config = new NGINXPublish(args[0]);
 
-        projectFilePath = args[0];
-        // check file exist
-        if (!File.Exists(projectFilePath))
-            throw new Exception($"The file {projectFilePath} not exist!");
 
-        // check extensions
-        if (Path.GetExtension(projectFilePath) != ".csproj")
-            throw new Exception($"The extensions file must be *.csproj!");
-        setFolderPath(ref projectFolder, Path.GetDirectoryName(projectFilePath));
-        projectName = Path.GetFileNameWithoutExtension(projectFilePath);
-        
-        // get config
-        string filePath = $"{projectFolder}/NGINXPublish.json";
-        if (File.Exists(filePath))
-        {
-            string s = File.ReadAllText(filePath);
-            var result = System.Text.Json.JsonSerializer.Deserialize<NGINXPublish>(s);
-            if (result == null)
-                throw new Exception($"Do nol load NGINXPublish.json!");
-            if (string.IsNullOrWhiteSpace(result.TempFolder))
-                throw new Exception($"Set the field TempFolder in NGINXPublish.json!");
-            if (string.IsNullOrWhiteSpace(result.BitviseTlpFile))
-                throw new Exception($"Set the field BitviseTlpFile in NGINXPublish.json!");
-            if (string.IsNullOrWhiteSpace(result.LinuxTempFolder))
-                throw new Exception($"Set the field LinuxTempFolder in NGINXPublish.json!");
-            if (string.IsNullOrWhiteSpace(result.LinuxWebFolder))
-                throw new Exception($"Set the field LinuxWebFolder in NGINXPublish.json!");
-            serviceName= result.ServiceName;
-            contentSubfolder = result.ContentSubfolder;
-            linuxWebFolder= result.LinuxWebFolder;
-            bitviseTlpFile = result.BitviseTlpFile;
-            linuxTempFolder = result.LinuxTempFolder;
-            linuxProjectFolder = $"{linuxTempFolder}/{projectName}";
-            tarFileName = $"{projectName}.tar.gz";
-            tempFolder = result.TempFolder;
-            tarFilePath = $"{tempFolder}/{tarFileName}";
-            tempProjectFolder= $"{tempFolder}/{projectName}";
+config.BindWithAppSettings();
+    Build();
+    var linux = new Linux(config.TempFolder, config.BitviseTlpFile);
+    putTolinux();
+    bool serviceExist = stopService();
+    MoveProjectFiles();
+    configureLinuxService();
+    if (serviceExist) startService();
+    configureNGINX();
 
-        }
-        else
-        {
-            // crete config file
-            string s = System.Text.Json.JsonSerializer.Serialize(new NGINXPublish());
-            File.WriteAllText(filePath, s);
-            throw new Exception($"Fill the NGINXPublish.json!");
-        }
 
-    }
-    
-    static bool RunScript(string script,string? workingDirectory=null)
+
+bool RunScript(string script,string? workingDirectory=null)
     {
         if (string.IsNullOrWhiteSpace(workingDirectory))
-            workingDirectory = tempFolder;
+            workingDirectory = config.TempFolder;
         var proc = new Process();
         proc.StartInfo.FileName = "cmd.exe";
         proc.StartInfo.Arguments = $"/C {script}";
@@ -108,94 +53,155 @@ internal class Program
         proc.WaitForExit();
         return proc.ExitCode == 0 || proc.ExitCode==1000;
     }
-    static bool sexec(string script) => RunScript($"sexec -profile=\"{bitviseTlpFile}\" -cmd=\"{script}\"");
-    static bool sftpc(string script) => RunScript($"sftpc -profile=\"{bitviseTlpFile}\" -cmd=\"{script}\"");
-
-    static void Build()
+bool sexec(string script) => RunScript($"sexec -profile=\"{config.BitviseTlpFile}\" -cmd=\"{script}\"");
+bool sftpc(string script) => RunScript($"sftpc -profile=\"{config.BitviseTlpFile}\" -cmd=\"{script}\"");
+void Build()
+{
+    if (Directory.Exists(config.PublishProjectFolder))
     {
-        if (Directory.Exists(tempProjectFolder))
-        {
-            Directory.Delete(tempProjectFolder, true);
-        }
-        Directory.CreateDirectory(tempProjectFolder);
-
-        if (!RunScript($"dotnet publish {projectFolder} --configuration Release  -o {tempProjectFolder}"))
-            throw new Exception("Error build project!");
+        Directory.Delete(config.PublishProjectFolder, true);
     }
-    static void putTolinux()
+    Directory.CreateDirectory(config.PublishProjectFolder);
+
+    if (!RunScript($"dotnet publish {config.ProjectFolder} --configuration Release  -o {config.PublishProjectFolder}"))
+        throw new Exception("Error build project!");
+    if (config.Service != null)
+        File.WriteAllLines($"{config.PublishProjectFolder}/{config.ProjectName}.service", config.CreateServiceFileText());
+    File.WriteAllLines($"{config.PublishProjectFolder}/{config.HostName}", config.GetNGINXConfig());
+    File.Copy(config.SSLPrivate, $"{config.PublishProjectFolder}\\{config.HostName}.key");
+    File.Copy(config.SSLPublic, $"{config.PublishProjectFolder}\\{config.HostName}.crt");
+}
+void putTolinux()
+{
+    if (File.Exists(config.TarFilePath))
+        File.Delete(config.TarFilePath);
+    // pack project
+    if (!RunScript($"tar -czvf {config.TarFileName} {config.ProjectName}"))
+        throw new Exception("Error pack !");
+    // create temp linux folder
+    if (!linux.DirectoryExist(config.LinuxTempFolder))
     {
-        if (File.Exists(tarFilePath))
-            File.Delete(tarFilePath);
-
-        if (!RunScript($"tar -czvf {tarFileName} {projectName}"))
-           throw new Exception("Error pack !");
-
-        if (!sexec($"if test -d '{linuxTempFolder}'; then echo 'The {linuxTempFolder} folder exists'; else mkdir '{linuxTempFolder}'; fi"))
-            throw new Exception("Error pack !");
-
-        if (!sexec($"if test -d '{linuxProjectFolder}'; then rm {linuxProjectFolder} -r; else echo; fi"))
-            throw new Exception("Error pack !");
-
-        if (!sftpc($"cd {linuxTempFolder};pwd;lcd {tempFolder};lpwd;put {tarFileName} -o;exit;"))
-           throw new Exception("Error put file !");
-
-        if (!sexec($"cd {linuxTempFolder}; tar -xzvf {tarFileName}"))
-            throw new Exception("Error unpack file!");
-
+        if (!linux.Mkdir(config.LinuxTempFolder))
+           throw new Exception($"Error create folder {config.LinuxTempFolder} !");
     }
-
-    static void setToNGINX()
+    // remove old folder  
+    if (linux.DirectoryExist(config.LinuxTempProjectFolder))
     {
-        if (serviceName!=null)
-        {
-            if (!sexec($"sudo service {serviceName} stop"))
-                throw new Exception($"Error stop service {serviceName}");
+        if (!linux.RemoveFolder(config.LinuxTempProjectFolder))
+            throw new Exception($"Error delete {config.LinuxTempProjectFolder}");
+    }
+ 
+    if (!sftpc($"cd {config.LinuxTempFolder};pwd;lcd {config.TempFolder};lpwd;put {config.TarFileName} -o;exit;"))
+        throw new Exception("Error put file !");
 
-        }
-        // check web folder
-        if (!sexec($"if test -d '{linuxWebFolder}'; then echo 'The {linuxWebFolder} folder exists'; else sudo mkdir '{linuxWebFolder}'; fi"))
-            throw new Exception($"Error create {linuxWebFolder} !");
-        // clean webfolder
-        if (!sexec($"sudo rm {linuxWebFolder}/* -r"))
-            Console.WriteLine($"Error clean {linuxWebFolder}");
-        
-        // move content
-        string sf = contentSubfolder == null ? "" : $"/{contentSubfolder}";
-        if (!sexec($"sudo mv {linuxProjectFolder}{sf}/* {linuxWebFolder}"))
-            throw new Exception($"Error move content !");
-       
-        // set credential
-        if (!sexec($"sudo chown www-data:www-data {linuxWebFolder} -R"))
-        {
-            throw new Exception($"Error set www-data:www-data !");
-        }
+    if (!sexec($"cd {config.LinuxTempFolder}; tar -xzvf {config.TarFileName}"))
+        throw new Exception("Error unpack file!");
+    Directory.Delete($"{config.TempFolder}/{config.ProjectName}", true);
+}
+bool stopService()
+{
+    if (config.Service == null) return false;
+    Console.WriteLine($"Stop linux service {config.Service.ServiceName}");
+    return sexec($"sudo service {config.Service.ServiceName} stop");
+}
+void startService()
+{
+    if (config.Service == null) return;
+    Console.WriteLine($"Start linux service {config.Service.ServiceName}");
+    sexec($"sudo service {config.Service.ServiceName} start");
+}
 
-
-        if (serviceName != null)
-        {
-
-            if (!sexec($"sudo service {serviceName} start"))
-                throw new Exception($"Error start service {serviceName}");
-        }
-
-        if (!sexec($"sudo nginx -s reload"))
-            throw new Exception($"Error restart NGINX");
-
+void MoveProjectFiles()
+{
+    // check web folder
+    if (!linux.DirectoryExist(config.PublishLinuxProjectFolder))
+    {
+        if (!linux.Mkdir(config.PublishLinuxProjectFolder))
+            throw new Exception($"Error create folder {config.PublishLinuxProjectFolder}");
     }
 
-    static void Main(string[] args)
+    // clean webfolder
+    if (!sexec($"sudo rm {config.PublishLinuxProjectFolder}/* -r"))
+        Console.WriteLine($"Error clean {config.PublishLinuxProjectFolder}");
+
+    // move content
+    string sf = string.IsNullOrWhiteSpace(config.BlazorContent) ? "" : $"/{config.BlazorContent}";
+    if (!sexec($"sudo mv {config.LinuxTempProjectFolder}{sf}/* {config.PublishLinuxProjectFolder}"))
+        throw new Exception($"Error move content !");
+
+    // set credential
+    if (!sexec($"sudo chown www-data:www-data {config.PublishLinuxProjectFolder} -R"))
     {
-        try
-        {
-            Initialize(args);
-            Build();
-            putTolinux();
-            setToNGINX();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-            Environment.Exit(1);
-        }
+        throw new Exception($"Error set www-data:www-data !");
     }
 }
+
+void configureLinuxService()
+{
+    if (config.Service == null) return;
+    if (!sexec($"sudo mv {config.PublishLinuxProjectFolder}/{config.ProjectName}.service /etc/systemd/system/"))
+        throw new Exception("Error move service file");
+    if (!sexec($"sudo systemctl enable {config.ProjectName}"))
+        throw new Exception("Error registered service");
+    if (!sexec($"sudo systemctl daemon-reload"))
+        throw new Exception("Error reload daemon service");
+}
+
+void configureNGINX()
+{
+    if (linux.FileExist($"/etc/nginx/sites-available/{config.HostName}"))
+    {
+        if (!sexec($"sudo cp /etc/nginx/sites-available/{config.HostName} /etc/nginx/sites-available/{config.HostName}.back"))
+            throw new Exception("Error copy reserve copy");
+    }
+    if (!sexec($"sudo mv {config.PublishLinuxProjectFolder}/{config.HostName} /etc/nginx/sites-available/{config.HostName}"))
+            throw new Exception("Error copy reserve copy");
+    if (!linux.FileExist($"/etc/nginx/sites-enabled/{config.HostName}"))
+    {
+        if (!sexec($"sudo ln -s /etc/nginx/sites-available/{config.HostName} /etc/nginx/sites-enabled/{config.HostName}"))
+            throw new Exception("Error copy reserve copy");
+    }
+    if (!sexec($"sudo mv {config.PublishLinuxProjectFolder}/{config.HostName}.crt /etc/ssl/certs/"))
+        throw new Exception("Error copy reserve copy");
+    if (!sexec($"sudo mv {config.PublishLinuxProjectFolder}/{config.HostName}.key /etc/ssl/private/"))
+        throw new Exception("Error copy reserve copy");
+
+    if (sexec($"sudo nginx -t"))
+    {
+        if (!sexec($"sudo nginx -s reload"))
+            Console.WriteLine("Error start nginx");
+    }
+}
+
+//void setToNGINX()
+//    {
+//        stopLinuxService();
+
+//        // check web folder
+//        if (!sexec($"if test -d '{linuxWebFolder}'; then echo 'The {linuxWebFolder} folder exists'; else sudo mkdir '{linuxWebFolder}'; fi"))
+//            throw new Exception($"Error create {linuxWebFolder} !");
+//        // clean webfolder
+//        if (!sexec($"sudo rm {linuxWebFolder}/* -r"))
+//            Console.WriteLine($"Error clean {linuxWebFolder}");
+
+//        // move content
+//        string sf = contentSubfolder == null ? "" : $"/{contentSubfolder}";
+//        if (!sexec($"sudo mv {linuxProjectFolder}{sf}/* {linuxWebFolder}"))
+//            throw new Exception($"Error move content !");
+
+//        // set credential
+//        if (!sexec($"sudo chown www-data:www-data {linuxWebFolder} -R"))
+//        {
+//            throw new Exception($"Error set www-data:www-data !");
+//        }
+
+//        configureNGINX();
+
+
+//        startLinuxService();
+
+//        if (!sexec($"sudo nginx -s reload"))
+//            throw new Exception($"Error restart NGINX");
+
+//    }
+
