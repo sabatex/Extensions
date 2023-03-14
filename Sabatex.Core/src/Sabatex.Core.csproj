@@ -1,14 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0;net6.0;net3.5</TargetFrameworks>
 	<OutputType>Library</OutputType>
-	<Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
 	<IsPackable>true</IsPackable>
 	<PackageId>Sabatex.Core</PackageId>
 	<Product>Sabatex.Core</Product>
-	<Version>1.1.0-alpha3</Version>
+	<Version>1.1.0</Version>
 	<Authors>Serhiy Lakas</Authors>
 	<Copyright>Serhiy Lakas</Copyright>
 	<Description>base definitions for Sabatex</Description>
@@ -17,16 +15,20 @@
 	<PackageProjectUrl>https://github.com/sabatex</PackageProjectUrl>
 	<Title>Sabatex base classes for libraries</Title>
 	<RepositoryUrl>https://github.com/sabatex/WebApiDocumentsExcange</RepositoryUrl>
-
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
  	<NeutralLanguage>en-US</NeutralLanguage>
-	
 	<Company>sabatex on git</Company>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	
-	
-	
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net7.0'">
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <None Remove="SabatexSettings.json" />
