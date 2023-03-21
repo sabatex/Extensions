@@ -1,12 +1,11 @@
 name: nuget publish radzenBlazor
-env:
-    PROJECT_FILE: Sabatex.RadzenBlazor/Sabatex.RadzenBlazor.csproj
+
 on:
   push:
     branches:
       - master
     paths:
-      - ${{ env.PROJECT_FILE }}
+      - 'Sabatex.RadzenBlazor/Sabatex.RadzenBlazor.csproj'
   
 
 jobs:
@@ -21,5 +20,5 @@ jobs:
           dotnet-version: | 
             7.0.x
             6.0.x
-      - run: dotnet pack --configuration RELEASE '${{ env.PROJECT_FILE }}'
+      - run: dotnet pack --configuration RELEASE 'Sabatex.RadzenBlazor/Sabatex.RadzenBlazor.csproj'
 
