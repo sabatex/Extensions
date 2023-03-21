@@ -1,1 +1,25 @@
 name: nuget publish radzenBlazor
+env:
+    PROJECT_FILE: 'Sabatex.RadzenBlazor/Sabatex.RadzenBlazor.csproj'
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ${{ env.PROJECT_FILE }}
+  
+
+jobs:
+  publish:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: | 
+            7.0.x
+            6.0.x
+      - run: dotnet pack --configuration RELEASE ${{ env.PROJECT_FILE }}
+
