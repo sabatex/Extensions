@@ -1,8 +1,7 @@
 {
   "profiles": {
     "publishNuget": {
-      "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\serhi\\source\\repos\\sabatex\\Extensions\\Sabatex.RadzenBlazor\\Sabatex.RadzenBlazor.csproj"
+      "commandName": "Project"
     }
   }
 }

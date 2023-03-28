@@ -45,6 +45,7 @@ internal class Linux
 
     public bool DirectoryExist(string? path) => sexec($"test -d '{path}'");
     public bool Mkdir(string? path) => sexec($"mkdir {path}");
+    public bool SudoMkdir(string? path) => sexec($"sudo mkdir {path}");
     public bool RemoveFolder(string? path) => sexec($"rm {path} -r");
     public bool FileExist(string? path)
     {

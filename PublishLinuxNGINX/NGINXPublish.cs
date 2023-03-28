@@ -60,9 +60,8 @@ namespace PublishLinuxNGINX
         {
             var conf = new ConfigurationBuilder()
                        .SetBasePath(ProjectFolder)
-                       .AddJsonFile("appsettings.json")
-                        .AddJsonFile("appsettings.Production.json", true)
-                        .Build();
+                       .AddJsonFile("SabatexSettings.json")
+                       .Build();
             conf.GetSection("NGINXPublish").Bind(this);
 
             if (string.IsNullOrWhiteSpace(TempFolder))

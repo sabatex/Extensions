@@ -2,7 +2,7 @@
   "profiles": {
     "PublishLinuxNGINX": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\serhi\\source\\repos\\sabatex\\WebApiDocumentsExcange\\Sabatex.ApiObjectsExchange\\Sabatex.ObjectsExchange.Server.csproj"
+      "commandLineArgs": "C:\\Users\\serhi\\source\\repos\\sabatex\\WebApiDocumentsExcange\\ObjectsExchange\\ObjectsExchange.csproj"
     }
   }
 }

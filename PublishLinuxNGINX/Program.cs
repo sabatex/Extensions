@@ -15,10 +15,24 @@ using System.Text.Json;
 //bool isServiceEnable = false;
 
 
-
-if (args.Length != 1)
-    throw new Exception("The command line args must pass full path project file *.csproj");
-NGINXPublish config = new NGINXPublish(args[0]);
+string currentDir = Directory.GetCurrentDirectory();
+string projPath = string.Empty;
+switch (args.Length)
+{
+    case 0:
+        var files = Directory.GetFiles(currentDir, "*.csproj");
+        if (files.Length == 0)
+            throw new Exception("The command line args must pass full path project file *.csproj or current directory must contains *.csproj file");
+        if (files.Length > 1)
+            throw new Exception("The Current directory must contains only one *.csproj file");
+        projPath = files[0];
+        break;
+    case 1:
+        projPath = args[0];
+        break;
+    default: throw new Exception("The command line args must pass full path project file *.csproj");
+}
+NGINXPublish config = new NGINXPublish(projPath);
 
 
 config.BindWithAppSettings();
@@ -116,7 +130,7 @@ void MoveProjectFiles()
     // check web folder
     if (!linux.DirectoryExist(config.PublishLinuxProjectFolder))
     {
-        if (!linux.Mkdir(config.PublishLinuxProjectFolder))
+        if (!linux.SudoMkdir(config.PublishLinuxProjectFolder))
             throw new Exception($"Error create folder {config.PublishLinuxProjectFolder}");
     }
 
