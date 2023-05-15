@@ -15,6 +15,7 @@ namespace sabatex.Extensions.ComponentModel.DataAnnotations
     /// </summary>
     internal class LocalizableString
     {
+        const string LocalizableString_LocalizationFailed = "Cannot retrieve property '{0}' because localization failed.  Type '{1}' is not public or does not contain a public static string property with the name '{2}'.";
         #region Member fields
 
         private readonly string _propertyName;
@@ -150,7 +151,7 @@ namespace sabatex.Extensions.ComponentModel.DataAnnotations
                     // If the property is not configured properly, then throw a missing member exception
                     if (badlyConfigured)
                     {
-                        string exceptionMessage =  string.Format(Resources.Strings.LocalizableString_LocalizationFailed, _propertyName, _resourceType.FullName, _propertyValue);
+                        string exceptionMessage =  string.Format(LocalizableString_LocalizationFailed, _propertyName, _resourceType.FullName, _propertyValue);
                         _cachedResult = () => { throw new InvalidOperationException(exceptionMessage); };
                     }
                     else
