@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace sabatex.Extensions.ClassExtensions
 {
+
     public static class EnumExtensions
     {
+#if NETSTANDARD2_0_OR_GREATER
         public static string Description(this Enum value)
         {
             if (value == null)
@@ -24,7 +25,8 @@ namespace sabatex.Extensions.ClassExtensions
                     ? string.Empty
                     : descriptionAttribute.Description;
         }
-
+#endif
+#if NETSTANDARD2_0_OR_GREATER
         public static string GetDescription(this Enum value)
         {
             var enumMember = value.GetType().GetMember(value.ToString()).FirstOrDefault();
@@ -37,6 +39,8 @@ namespace sabatex.Extensions.ClassExtensions
                     ? value.ToString()
                     : descriptionAttribute.Description;
         }
+#endif
+#if NETSTANDARD2_0_OR_GREATER
         public static Tuple<string, string>[] GetEnumDisplayName(this Enum _enum)
         {
             List<Tuple<string, string>> result = new List<Tuple<string, string>>();
@@ -50,6 +54,8 @@ namespace sabatex.Extensions.ClassExtensions
 
 
         }
+#endif
+#if NETSTANDARD2_0_OR_GREATER
         public static Tuple<Enum, string>[] GetEnumListWithDescription(Type _enum)
         {
             List<Tuple<Enum, string>> result = new List<Tuple<Enum, string>>();
@@ -63,7 +69,7 @@ namespace sabatex.Extensions.ClassExtensions
             }
             return result.ToArray();
         }
-
+#endif
 
     }
 

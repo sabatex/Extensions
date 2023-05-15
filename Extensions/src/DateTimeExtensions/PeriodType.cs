@@ -5,6 +5,7 @@ using System.Text;
 
 namespace sabatex.Extensions.DateTimeExtensions
 {
+#if NETSTANDARD2_0_OR_GREATER
     [DisplayEnum(Name ="Select period")]
     public enum PeriodType
     {
@@ -22,4 +23,5 @@ namespace sabatex.Extensions.DateTimeExtensions
         Day = 5
 
     }
+#endif
 }

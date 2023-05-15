@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 // Copyrigth (c) Serhiy Lakas 2020
-using System;
-using System.Collections.Generic;
+namespace sabatex.Extensions
+{
+#if NETSTANDARD2_0_OR_GREATER
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using System;
+using System.Collections.Generic;
 
-namespace sabatex.Extensions
-{
     //
     // Summary:
     //     Represents a 128-bit unsigned integer.
@@ -296,4 +297,5 @@ namespace sabatex.Extensions
         }
 
     }
+#endif
 }

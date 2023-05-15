@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;netstandard2.1;netstandard2.0;net3.5</TargetFrameworks>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Serhiy Lakas</Authors>
     <Product>sabatex common library</Product>
     <Company>sabatex on git</Company>
     <Description>Standart class extensions (Char,DateTime,Enum,String) Diagnostic (TraceListenerWithDateTime) Text (Encoding1251,EncodingProvider1251)</Description>
     <Copyright>2019, Serhiy Lakas</Copyright>
-    <Version>6.0.0</Version>
+    <Version>6.0.1</Version>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageTags>C#</PackageTags>
 	<PackageId>sabatex.Extensions</PackageId>
@@ -23,7 +23,7 @@
     <RepositoryType>GIT</RepositoryType>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'net3.5'">
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.1" />
   </ItemGroup>
  

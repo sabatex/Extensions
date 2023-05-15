@@ -4,6 +4,7 @@ using System.Text;
 
 namespace sabatex.Extensions.Text
 {
+#if NETSTANDARD2_0_OR_GREATER
     public class EncodingProvider1251 : EncodingProvider
     {
         public override Encoding GetEncoding(int codepage)
@@ -21,4 +22,5 @@ namespace sabatex.Extensions.Text
             throw new NotImplementedException();
         }
     }
+#endif
 }

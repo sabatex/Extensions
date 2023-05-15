@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace sabatex.Extensions
 {
+#if NETSTANDARD2_0_OR_GREATER
     /// <summary>
     /// Observable object with INotifyPropertyChanged implemented
     /// </summary>
@@ -44,4 +45,5 @@ namespace sabatex.Extensions
 
 
     }
+#endif
 }
