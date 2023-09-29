@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.RadzenBlazor", "Sab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.RadzenBlazor.ServerSide", "Sabatex.RadzenBlazor.ServerSide\sabatex.RadzenBlazor.ServerSide.csproj", "{3B810062-CC7F-4429-BDE1-A855D5178701}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.BlazorHelper", "sabatex.BlazorHelper\sabatex.BlazorHelper.csproj", "{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sabatex.AspNetCore.OData.Extensions", "Sabatex.AspNetCore.OData.Extensions\Sabatex.AspNetCore.OData.Extensions.csproj", "{8F5EE08E-2B5E-4F24-8B33-117435E84896}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,10 +69,10 @@ Global
 		{3B810062-CC7F-4429-BDE1-A855D5178701}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B810062-CC7F-4429-BDE1-A855D5178701}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B810062-CC7F-4429-BDE1-A855D5178701}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F5EE08E-2B5E-4F24-8B33-117435E84896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F5EE08E-2B5E-4F24-8B33-117435E84896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F5EE08E-2B5E-4F24-8B33-117435E84896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F5EE08E-2B5E-4F24-8B33-117435E84896}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,7 +86,7 @@ Global
 		{EFB5449D-A12C-43C6-92B3-4FFABF83846D} = {061CEFB1-CC76-443C-BCAF-62EE43936C9B}
 		{36457FAA-4019-43ED-85E5-5AB0A6919B21} = {5AB7CA5D-2837-4FBE-8583-0562D7A31062}
 		{3B810062-CC7F-4429-BDE1-A855D5178701} = {5AB7CA5D-2837-4FBE-8583-0562D7A31062}
-		{EAD7EA5E-0C5E-4D0B-A9ED-F913CC3B3953} = {5AB7CA5D-2837-4FBE-8583-0562D7A31062}
+		{8F5EE08E-2B5E-4F24-8B33-117435E84896} = {6E3CDA58-2866-45B2-8E13-D93F0227951E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {867279D4-3A58-4403-AF90-072696586C2C}

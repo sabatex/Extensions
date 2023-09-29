@@ -1,0 +1,27 @@
+{
+  "Linux": {
+    "UserHomeFolder": "/home/azureuser",
+    "BitviseTlpFile": "C:\\Users\\serhi\\OneDrive\\FIRMS\\TG\\WebSite.tlp",
+    "PublishFolder": "/var/www/tgapi",
+    "FrontEnd": false,
+    "Service": {
+      "ServiceName": "tgapi",
+      "Port": 6000,
+      "UpdateService": false
+    }
+  },
+  "NGINXPublish": {
+    "HostName": "sabatex.francecentral.cloudapp.azure.com",
+    "ProjectName": "tgapi",
+    "TempFolder": "",
+    "LinuxTempFolder": "/home/azureuser/temp",
+    "LinuxWebFolder": "/var/www",
+    "BlazorContent": "",
+    "Service": {
+      "ServiceName": "tgapi",
+      "Port": 6000,
+      "UpdateService": true
+    }
+  }
+
+}
