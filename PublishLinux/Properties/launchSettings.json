@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PublishLinux": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\serhi\\source\\repos\\BuhExpert\\TG\\TG\\Client\\TG.Client.csproj"
+    }
+  }
+}

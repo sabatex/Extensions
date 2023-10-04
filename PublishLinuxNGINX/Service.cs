@@ -10,6 +10,7 @@ namespace PublishLinuxNGINX
     {
         public string? ServiceName { get; set; }
         public int Port { get; set; } = 5000;
+        public bool UpdateService { get; set; } = false;
 
     }
 }

@@ -5,14 +5,7 @@ using System.Diagnostics;
 using System.Text.Json;
 
 
-//string linuxProjectFolder=string.Empty;
-//string tarFilePath= string.Empty;
-//string tempFolder= string.Empty;
-//string tempProjectFolder=string.Empty;
-//string linuxWebFolder=string.Empty;
-//string? serviceName = null;
-//string? contentSubfolder= null;
-//bool isServiceEnable = false;
+
 
 
 string currentDir = Directory.GetCurrentDirectory();
@@ -41,9 +34,9 @@ config.BindWithAppSettings();
     putTolinux();
     bool serviceExist = stopService();
     MoveProjectFiles();
-    configureLinuxService();
+    if  (config.Service?.UpdateService ?? false) configureLinuxService();
     if (serviceExist) startService();
-    configureNGINX();
+    if (config.UpdateNGINX) configureNGINX();
 
 
 
@@ -69,6 +62,7 @@ bool RunScript(string script,string? workingDirectory=null)
     }
 bool sexec(string script) => RunScript($"sexec -profile=\"{config.BitviseTlpFile}\" -cmd=\"{script}\"");
 bool sftpc(string script) => RunScript($"sftpc -profile=\"{config.BitviseTlpFile}\" -cmd=\"{script}\"");
+
 void Build()
 {
     if (Directory.Exists(config.PublishProjectFolder))
@@ -79,11 +73,11 @@ void Build()
 
     if (!RunScript($"dotnet publish {config.ProjectFolder} --configuration Release  -o {config.PublishProjectFolder}"))
         throw new Exception("Error build project!");
-    if (config.Service != null)
+    if (config.Service?.UpdateService ?? false)
         File.WriteAllLines($"{config.PublishProjectFolder}/{config.ProjectName}.service", config.CreateServiceFileText());
-    File.WriteAllLines($"{config.PublishProjectFolder}/{config.HostName}", config.GetNGINXConfig());
-    File.Copy(config.SSLPrivate, $"{config.PublishProjectFolder}\\{config.HostName}.key");
-    File.Copy(config.SSLPublic, $"{config.PublishProjectFolder}\\{config.HostName}.crt");
+    if (config.UpdateNGINX) File.WriteAllLines($"{config.PublishProjectFolder}/{config.ProjectName}", config.GetNGINXConfig());
+    if (config.SSLPrivate != null) File.Copy(config.SSLPrivate, $"{config.PublishProjectFolder}\\{config.HostName}.key");
+    if (config.SSLPublic != null) File.Copy(config.SSLPublic, $"{config.PublishProjectFolder}\\{config.HostName}.crt");
 }
 void putTolinux()
 {
@@ -186,36 +180,3 @@ void configureNGINX()
             Console.WriteLine("Error start nginx");
     }
 }
-
-//void setToNGINX()
-//    {
-//        stopLinuxService();
-
-//        // check web folder
-//        if (!sexec($"if test -d '{linuxWebFolder}'; then echo 'The {linuxWebFolder} folder exists'; else sudo mkdir '{linuxWebFolder}'; fi"))
-//            throw new Exception($"Error create {linuxWebFolder} !");
-//        // clean webfolder
-//        if (!sexec($"sudo rm {linuxWebFolder}/* -r"))
-//            Console.WriteLine($"Error clean {linuxWebFolder}");
-
-//        // move content
-//        string sf = contentSubfolder == null ? "" : $"/{contentSubfolder}";
-//        if (!sexec($"sudo mv {linuxProjectFolder}{sf}/* {linuxWebFolder}"))
-//            throw new Exception($"Error move content !");
-
-//        // set credential
-//        if (!sexec($"sudo chown www-data:www-data {linuxWebFolder} -R"))
-//        {
-//            throw new Exception($"Error set www-data:www-data !");
-//        }
-
-//        configureNGINX();
-
-
-//        startLinuxService();
-
-//        if (!sexec($"sudo nginx -s reload"))
-//            throw new Exception($"Error restart NGINX");
-
-//    }
-

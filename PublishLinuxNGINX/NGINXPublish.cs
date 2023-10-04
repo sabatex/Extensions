@@ -25,7 +25,8 @@ namespace PublishLinuxNGINX
         public string? LinuxWebFolder { get;set; }
         public string? BlazorContent { get; set; }
 
-        public string? HostName { get; set; }
+        public string[]? HostName { get; set; }
+        private string? HostNames=>string.Join(",", HostName ?? new string[] { });
         public string? SSLPrivate { get;set; }
         public string? SSLPublic { get; set; }
 
@@ -40,7 +41,8 @@ namespace PublishLinuxNGINX
         public string TarFilePath { get; private set; }
         public string LinuxTempProjectFolder { get; private set; }
 
-
+       
+        public bool UpdateNGINX { get; set; } = false;
 
         public NGINXPublish(string projectFilePath)
         {
@@ -97,7 +99,7 @@ namespace PublishLinuxNGINX
         {
             yield return "server {";
             yield return "    listen 80;";
-            yield return $"    server_name {HostName};";
+            yield return $"    server_name {HostNames};";
             yield return "    location / {";
             yield return "        add_header Strict-Transport-Security max-age=15768000;";
             yield return "        return 301 https://$host$request_uri;";
@@ -106,9 +108,9 @@ namespace PublishLinuxNGINX
             yield return "";
             yield return "server {";
             yield return "    listen *:443              ssl;";
-            yield return $"    server_name               {HostName};";
-            yield return $"    ssl_certificate           /etc/ssl/certs/{HostName}.crt;";
-            yield return $"    ssl_certificate_key       /etc/ssl/private/{HostName}.key;";
+            yield return $"    server_name               {HostNames};";
+            yield return $"    ssl_certificate           /etc/ssl/certs/{ProjectName}.crt;";
+            yield return $"    ssl_certificate_key       /etc/ssl/private/{ProjectName}.key;";
             yield return "    ssl_protocols             TLSv1.1 TLSv1.2;";
             yield return "    ssl_prefer_server_ciphers on;";
             yield return "    ssl_ciphers               \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";";
