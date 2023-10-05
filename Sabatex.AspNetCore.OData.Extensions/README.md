@@ -1,9 +1,19 @@
 ﻿# AspNetCore OData Extensions
 
-## change enum routing from string to int 
+## Change enum routing from symbolic to numeric
 
----
-using Sabatex.AspNetCore.OData.Extensions
+before
+
+```
+$filter=State eq 'New'
+```
+after 
+```
+$filter=State eq 1
+```
+### Code sample
+```C#
+using Sabatex.AspNetCore.OData.Extensions;
 
 IEdmModel GetEdmModel()
 {
@@ -12,4 +22,4 @@ IEdmModel GetEdmModel()
     builder.AddEnumTypeAsInt(typeof(Enum Type));
     return builder.GetEdmModel();
 }
----
+```
