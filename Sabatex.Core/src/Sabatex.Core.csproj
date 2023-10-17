@@ -6,20 +6,24 @@
 	<IsPackable>true</IsPackable>
 	<PackageId>Sabatex.Core</PackageId>
 	<Product>Sabatex.Core</Product>
-	<Version>2.0.0</Version>
-	  <LangVersion>10</LangVersion>
+	<Version>2.0.3-beta1</Version>
+	<LangVersion>10</LangVersion>
 	<Authors>Serhiy Lakas</Authors>
 	<Copyright>Serhiy Lakas</Copyright>
 	<Description>base definitions for Sabatex</Description>
 	<PackageTags>sabatex exchange api blazor</PackageTags>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<PackageProjectUrl>https://github.com/sabatex</PackageProjectUrl>
+	
 	<Title>Sabatex base classes for libraries</Title>
-	<RepositoryUrl>https://github.com/sabatex/WebApiDocumentsExcange</RepositoryUrl>
+
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
  	<NeutralLanguage>en-US</NeutralLanguage>
 	<Company>sabatex on git</Company>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  
+	<PackageProjectUrl>https://github.com/sabatex/Extensions</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/sabatex/Extensions</RepositoryUrl>
+  
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
 	<ImplicitUsings>enable</ImplicitUsings>
@@ -29,21 +33,15 @@
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
   </PropertyGroup>
-
-
   <ItemGroup>
-    <None Remove="SabatexSettings.json" />
+	<None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
-
   <ItemGroup>
-    <Content Include="SabatexSettings.json">
+    <None Update="SabatexSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-	<None Include="README.md" Pack="true" PackagePath="\" />
+    </None>
   </ItemGroup>
 
 </Project>

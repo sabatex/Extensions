@@ -11,17 +11,11 @@ namespace Sabatex.Core
     /// for primary key base class 
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public abstract class EntityBase<TKey>:IEntityBase
+    public abstract class EntityBase<TKey>:IEntityBase<TKey>
     {
         /// <summary>
         /// Primary key
         /// </summary>
         public TKey Id { get; set; } = default!;
-        /// <summary>
-        /// String object presentation 
-        /// </summary>
-        /// <returns></returns>
-        public string KeyAsString() => Id.ToString();
-
     }
 }
