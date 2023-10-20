@@ -5,41 +5,44 @@ namespace CommonLibrary;
 
 public class ProjectConfig
 {
-    public readonly string ProjectFilePath;
-    public readonly string ProjectFolderPath;
-    public readonly string Version;
-    public readonly bool IsPreRelease;
-    public readonly string OutputPath;
-    public readonly string BuildConfiguration;
-    
+    public string ProjectFile { get; private set; }
+    public string ProjectFolder { get; private set; }
+    public string Version { get; private set; }
+    public bool IsPreRelease { get; private set; }
+    public  string OutputPath { get; private set; }
+    public  string BuildConfiguration { get; private set; }
+
     public readonly System.Text.Json.JsonDocument jsonDocument = System.Text.Json.JsonDocument.Parse("{}");
 
     public ProjectConfig(string? projectFilePath)
 	{
 		if (projectFilePath == null)
 			throw new ArgumentNullException();
-		ProjectFilePath = projectFilePath;
-        if (!File.Exists(ProjectFilePath))
-            throw new Exception($"The file {ProjectFilePath} not exist!");
+		ProjectFile = projectFilePath;
+        if (!File.Exists(ProjectFile))
+            throw new Exception($"The file {ProjectFile} not exist!");
         // check extensions
-        if (Path.GetExtension(ProjectFilePath) != ".csproj")
+        if (Path.GetExtension(ProjectFile) != ".csproj")
             throw new Exception($"The extensions file must be *.csproj!");
-        var directory = Path.GetDirectoryName(ProjectFilePath);
+        
+        var directory = Path.GetDirectoryName(ProjectFile);
         if (directory == null)
-            throw new Exception($"The full project path is wrong:  {ProjectFilePath}");
-        ProjectFolderPath = directory;
+            throw new Exception($"The full project path is wrong:  {ProjectFile}");
+        ProjectFolder = directory;
+        
         // read data from xml
         var xml = new System.Xml.XmlDocument();
-        xml.Load(ProjectFilePath);
+        xml.Load(ProjectFile);
         var version = xml.SelectSingleNode("Project/PropertyGroup/Version")?.InnerText;
         if (version == null)
-            throw new Exception($"The project file {ProjectFilePath} do not include section <PropertyGroup/Version>");
+            throw new Exception($"The project file {ProjectFile} do not include section <PropertyGroup/Version>");
+        
         Version = version;
         var ver = new Version(version);
         IsPreRelease= ver.IsPreRelease;
         BuildConfiguration = IsPreRelease ?"Debug" : "Release";
-        OutputPath = ProjectFolderPath + "\\bin\\" + BuildConfiguration;
-        var configFile = $"{ProjectFolderPath}/SabatexSettings.json";
+        OutputPath = ProjectFolder + "\\bin\\" + BuildConfiguration;
+        var configFile = $"{ProjectFolder}/SabatexSettings.json";
         if (File.Exists(configFile))
         {
             jsonDocument = System.Text.Json.JsonDocument.Parse(File.ReadAllText(configFile));
@@ -64,7 +67,7 @@ public class ProjectConfig
         proc.StartInfo.UseShellExecute = false;
         proc.StartInfo.RedirectStandardOutput = true;
         proc.StartInfo.RedirectStandardError = true;
-        proc.StartInfo.WorkingDirectory = ProjectFolderPath;
+        proc.StartInfo.WorkingDirectory = ProjectFolder;
         proc.OutputDataReceived += (a, b) => Console.WriteLine(b.Data);
         proc.ErrorDataReceived += (a, b) => Console.WriteLine(b.Data);
         proc.StartInfo.CreateNoWindow = true;
