@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "sabatex-publish": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\serhi\\source\\repos\\sabatex\\Sabatex.RadzenBlazor\\Sabatex.RadzenBlazor\\Sabatex.RadzenBlazor.csproj"
+    }
+  }
+}

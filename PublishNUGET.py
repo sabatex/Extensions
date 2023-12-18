@@ -7,10 +7,13 @@ import json
 import sys
 from xml.etree import ElementTree
 
+
+
 def ALPHA()->str:"alpha"
 def BETA()->str:"beta"
 def RC()->str:"rc"
 def RELEACE()->str:"releace"
+
 def getNUGETConfig(nugetFile:str):
     if os.path.exists(nugetFile):
         f = open(nugetFile , "r" )
@@ -19,6 +22,7 @@ def getNUGETConfig(nugetFile:str):
         return config
     else:
         return {"projVersion":"","version": "1.0.0", "buildVersion": 4, "stage": "alpha","stages":{ALPHA,BETA,RC,RELEACE}}    
+
 def checkVersionFromProj(projectFile:str,nugetConf):
     if not os.path.exists(projectFile):
         raise "The file " + projectFile + " do not exist!"
