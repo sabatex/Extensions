@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sabatex.Core", "Sabatex.Core", "{1F83D918-F3C5-41AA-84BB-CFD0418F06DE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.Core", "Sabatex.Core\Sabatex.Core.csproj", "{08B2D84A-AD63-45AC-9A07-99FC2B6CB02E}"
 EndProject
 Global
@@ -20,9 +18,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{08B2D84A-AD63-45AC-9A07-99FC2B6CB02E} = {1F83D918-F3C5-41AA-84BB-CFD0418F06DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBFAAC9D-ED93-4CD0-9C1A-626229AB8716}
