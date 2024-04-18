@@ -56,7 +56,6 @@ public class Linux
        TarFileName = $"{projectName}.tar.gz";
        FrontEnd = false ;
        PublishFolder = "/var/www/" + projectName;
- 
     }
 
 

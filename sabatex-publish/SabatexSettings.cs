@@ -102,10 +102,20 @@ public class SabatexSettings
 
 		}
 
-		Linux = new Linux(ProjectName);
-		
-		var conf = new ConfigurationBuilder().SetBasePath(ProjectFolder).AddJsonFile(configFileName).Build();
-		var sabatexSection = conf.GetSection("Sabatex");
+		var userSecretId = xml.SelectSingleNode("Project/PropertyGroup/UserSecretsId")?.InnerText;
+
+
+
+        Linux = new Linux(ProjectName);
+		var builder = new ConfigurationBuilder().SetBasePath(ProjectFolder);
+		if (File.Exists(configFileName))
+			builder.AddJsonFile(configFileName);
+		if (!String.IsNullOrWhiteSpace(userSecretId))
+			builder.AddUserSecrets(userSecretId);
+
+
+        var conf = builder.Build();
+		var sabatexSection = conf.GetSection("SabatexSettings");
 		if (sabatexSection == null)
 		{
 			throw new Exception("The file appsetting.json d'nt contains section Sabatex!!! ");
