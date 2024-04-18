@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "publishNuget", "publishNuget\publishNuget.csproj", "{951D4F8D-E5E8-4050-B935-A9A882D2471F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLibrary", "CommonLibrary\CommonLibrary.csproj", "{70D3BF50-686B-414F-A39C-88F51C135D55}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublishLinux", "PublishLinux\PublishLinux.csproj", "{97EF2E41-0B39-4130-8E37-0079825A5F2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sabatex-publish", "sabatex-publish\sabatex-publish.csproj", "{F3A2DFDB-855E-4920-875D-A99F7F6082AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex-publish", "sabatex-publish\sabatex-publish.csproj", "{F3A2DFDB-855E-4920-875D-A99F7F6082AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Debug|arm64.Build.0 = Debug|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Debug|x86.Build.0 = Debug|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Release|arm64.ActiveCfg = Release|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Release|arm64.Build.0 = Release|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Release|x86.ActiveCfg = Release|Any CPU
-		{951D4F8D-E5E8-4050-B935-A9A882D2471F}.Release|x86.Build.0 = Release|Any CPU
 		{70D3BF50-686B-414F-A39C-88F51C135D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{70D3BF50-686B-414F-A39C-88F51C135D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70D3BF50-686B-414F-A39C-88F51C135D55}.Debug|arm64.ActiveCfg = Debug|Any CPU

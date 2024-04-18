@@ -1,7 +1,0 @@
-{
-  "profiles": {
-    "publishNuget": {
-      "commandName": "Project"
-    }
-  }
-}
