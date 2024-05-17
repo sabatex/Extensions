@@ -6,7 +6,7 @@
     <RootNamespace>sabatex_publish</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
 	<UserSecretsId>b831fe5d-b6b4-4517-b8d5-b59105ddfffe</UserSecretsId>
   </PropertyGroup>
 

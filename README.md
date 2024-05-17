@@ -42,4 +42,6 @@ At the command prompt, go to the folder where the *.csproj file is located. And 
   "SabatexSettings:Linux:Service:Port": "asp application port",
   "SabatexSettings:Linux:PublishFolder": "/opt/app/sabatex-exchange",
   "SabatexSettings:Linux:FrontEnd": "False", // True - Blazor WASM standalone, false - asp.net core project
+  "SabatexSettings:Linux:BitviseTlpFile": "Bitvise tlp file path",
+
 ```
