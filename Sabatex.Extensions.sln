@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.Extensions", "Sabatex.Extensions\Sabatex.Extensions.csproj", "{8A36CFA0-1B50-462C-BDCA-0AB0682F4577}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.Extensions.Tests", "Sabatex.Exchange.Tests\sabatex.Extensions.Tests.csproj", "{B69ED435-7320-41C6-9213-E2453BCC0199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.Core", "Sabatex.Core\Sabatex.Core.csproj", "{EF6B2DDD-A5C1-45C7-A82A-5FF9BC54A767}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sabatex.Extensions.Tests", "Sabatex.Extensions.Tests\sabatex.Extensions.Tests.csproj", "{A5B79A12-9306-4A0E-8660-16FCF5FEE4A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{8A36CFA0-1B50-462C-BDCA-0AB0682F4577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A36CFA0-1B50-462C-BDCA-0AB0682F4577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A36CFA0-1B50-462C-BDCA-0AB0682F4577}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B69ED435-7320-41C6-9213-E2453BCC0199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B69ED435-7320-41C6-9213-E2453BCC0199}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B69ED435-7320-41C6-9213-E2453BCC0199}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B69ED435-7320-41C6-9213-E2453BCC0199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF6B2DDD-A5C1-45C7-A82A-5FF9BC54A767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6B2DDD-A5C1-45C7-A82A-5FF9BC54A767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6B2DDD-A5C1-45C7-A82A-5FF9BC54A767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6B2DDD-A5C1-45C7-A82A-5FF9BC54A767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B79A12-9306-4A0E-8660-16FCF5FEE4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B79A12-9306-4A0E-8660-16FCF5FEE4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B79A12-9306-4A0E-8660-16FCF5FEE4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B79A12-9306-4A0E-8660-16FCF5FEE4A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
