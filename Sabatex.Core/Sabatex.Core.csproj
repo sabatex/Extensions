@@ -10,7 +10,7 @@
 	<IsPackable>true</IsPackable>
 	<PackageId>Sabatex.Core</PackageId>
 	<Product>Sabatex.Core</Product>
-	<Version>2.1.0</Version>
+	<Version>2.1.0 </Version>
 	<Authors>Serhiy Lakas</Authors>
 	<Copyright>Serhiy Lakas</Copyright>
 	<Description>base definitions for Sabatex</Description>
