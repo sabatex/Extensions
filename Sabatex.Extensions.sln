@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabatex.Core", "Sabatex.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sabatex.Extensions.Tests", "Sabatex.Extensions.Tests\Sabatex.Extensions.Tests.csproj", "{AA3DA913-0BEA-4594-B5B3-8E9D4FF51628}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sabatex-publish", "sabatex-publish\sabatex-publish.csproj", "{9BBF50B1-00A1-47FE-80AA-87AF62DB5370}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AA3DA913-0BEA-4594-B5B3-8E9D4FF51628}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA3DA913-0BEA-4594-B5B3-8E9D4FF51628}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA3DA913-0BEA-4594-B5B3-8E9D4FF51628}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BBF50B1-00A1-47FE-80AA-87AF62DB5370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBF50B1-00A1-47FE-80AA-87AF62DB5370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBF50B1-00A1-47FE-80AA-87AF62DB5370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBF50B1-00A1-47FE-80AA-87AF62DB5370}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
