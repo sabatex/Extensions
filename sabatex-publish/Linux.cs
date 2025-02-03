@@ -8,10 +8,13 @@ namespace Sabatex.Publish;
 
 public class Linux
 {
+ 
     /// <summary>
-    /// read from json
+    /// Service name
+    /// defaul set as ProjectName
     /// </summary>
-    public Service Service { get; set; }=new Service();
+    public string ServiceName { get; set; }
+
     /// <summary>
     /// read from json
     /// </summary>
@@ -21,6 +24,10 @@ public class Linux
     /// The publisher ignore Linux section if null value 
     /// </summary>
     public string? UserHomeFolder { get; set; }
+    /// <summary>
+    /// The application port use
+    /// </summary>
+    public int Port { get; set; } = 5000;
     /// <summary>
     /// 
     /// </summary>
@@ -56,7 +63,9 @@ public class Linux
        TarFileName = $"{projectName}.tar.gz";
        FrontEnd = false ;
        PublishFolder = "/var/www/" + projectName;
+        ServiceName = projectName.ToLower();
     }
+
 
 
 }

@@ -2,7 +2,7 @@
   "profiles": {
     "sabatex-publish": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\serhi\\source\\repos\\sabatex-ZNC\\ZNCSite\\WEBSite\\ZNCSite.csproj"
+      "commandLineArgs": "--csprojC:\\Users\\serhi\\.repos\\sabatex\\Bakery\\Sabatex.Bakery\\Sabatex.Bakery\\Sabatex.Bakery.csproj"
     }
   }
 }
