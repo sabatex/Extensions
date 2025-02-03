@@ -128,7 +128,17 @@ public class SabatexSettings:AppConfig
 			TempFolder = $"{Path.GetTempPath()}Sabatex";
 		}
 
+		if (!Directory.Exists(TempFolder))
+		{
+			Directory.CreateDirectory(TempFolder);
+		}
+
+
 		TempPublishProjectFolder = $"{TempFolder}\\{ProjectName}";
+		if (!Directory.Exists(TempPublishProjectFolder))
+		{
+			Directory.CreateDirectory (TempPublishProjectFolder);
+		}
 
 	}
 

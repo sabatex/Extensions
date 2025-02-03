@@ -385,8 +385,11 @@ public class Program
 			if (settings.IsLibrary)
 			{
 				string nugetAuthToken = settings.NUGET.GetToken();
-		
-				localScriptShell.Delete($"{settings.OutputPath}\\*.nupkg");
+                if (Directory.Exists(settings.OutputPath))
+                {
+                    string packagesPath = $"{settings.OutputPath}\\*.nupkg";
+                    localScriptShell.Delete(packagesPath);
+                }
 				await PackNugetAsync();
 
 				string symbols = settings.IsPreRelease ? ".symbols" : string.Empty;
