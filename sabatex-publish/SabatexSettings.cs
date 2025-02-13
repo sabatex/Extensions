@@ -109,7 +109,11 @@ public class SabatexSettings:AppConfig
 
         Linux = new Linux(ProjectName);
 		var builder = new ConfigurationBuilder().SetBasePath(ProjectFolder);
-		if (File.Exists($"{ProjectFolder}/{configFileName}"))
+        string appConfig = $"{AppDomain.CurrentDomain.BaseDirectory}/sabatex-publish.json";
+        if (File.Exists($"{appConfig}"))
+            builder.AddJsonFile(appConfig);
+
+        if (File.Exists($"{ProjectFolder}/{configFileName}"))
 			builder.AddJsonFile(configFileName);
 		if (!String.IsNullOrWhiteSpace(userSecretId))
 			builder.AddUserSecrets(userSecretId);
