@@ -37,7 +37,7 @@ public class Program
             Directory.Delete(settings.TempPublishProjectFolder, true);
         }
         Directory.CreateDirectory(settings.TempPublishProjectFolder);
-        string script = $"dotnet publish {settings.ProjectFolder} --configuration Release  -o {settings.TempPublishProjectFolder}";
+        string script = $"dotnet publish {settings.ProjectFolder}/{settings.ProjectName}.csproj --configuration Release  -o {settings.TempPublishProjectFolder}";
         if (!localScriptShell.Run(script, settings.ProjectFolder))
             throw new Exception("Error build project!");
     }
