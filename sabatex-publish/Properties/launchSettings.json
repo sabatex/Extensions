@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "sabatex-publish": {
-      "commandName": "Project",
-      "commandLineArgs": "--csprojD:\\repos\\sabatex\\SabatexObjectsExcange\\ObjectsExchange\\ObjectsExchange.csproj"
-    }
-  }
-}
