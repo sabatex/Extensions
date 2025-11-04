@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sabatex.Extensions\Sabatex.Extensions.csproj" />
+    <ProjectReference Include="..\Sabatex.Core\Sabatex.Core.csproj" />
   </ItemGroup>
 
 </Project>
