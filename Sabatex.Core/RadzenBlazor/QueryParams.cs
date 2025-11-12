@@ -31,12 +31,18 @@ public class QueryParams
     /// Gets or sets the filter expression used to determine which items are included in the operation.
     /// </summary>
     public string? Filter { get; set; }
-
+    /// <summary>
+    /// Gets or sets the foreign key associated with this entity.
+    /// </summary>
     public ForeginKey? ForeginKey { get; set; }
     /// <summary>
     /// Include nested entity
     /// </summary>
     public IEnumerable<string> Include { get; set; }
+    /// <summary>
+    /// Initializes a new instance of the QueryParams class with the specified foreign key filter.
+    /// </summary>
+    /// <param name="foreginKey">An optional foreign key filter to apply to the query. If null, no foreign key filtering is applied.</param>
     public QueryParams(ForeginKey? foreginKey = null)
     {
         ForeginKey = foreginKey;

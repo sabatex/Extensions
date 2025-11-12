@@ -37,6 +37,14 @@ namespace Sabatex.Extensions
         /// Occurs when property changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Raises the PropertyChanged event to notify listeners that a property value has changed.
+        /// </summary>
+        /// <remarks>Call this method in the setter of a property to notify subscribers that the
+        /// property's value has changed. This is commonly used to implement the INotifyPropertyChanged interface in
+        /// data-binding scenarios.</remarks>
+        /// <param name="propertyName">The name of the property that changed. This value is optional and is automatically provided when called from
+        /// a property setter.</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
              PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

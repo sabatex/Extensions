@@ -68,20 +68,48 @@ public interface IIdentityAdapter
     /// <returns>A string containing an error message if the registration fails; otherwise, <see langword="null"/> if the
     /// registration is successful.</returns>
     Task<string?> RegisterUserAsync(string email, string password,string fullName, string returnUrl);
-
+    /// <summary>
+    /// Asynchronously signs the current user out of the application.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous sign-out operation.</returns>
     Task SignOutAsync();
-
+    /// <summary>
+    /// Redirects the current response to the specified URI.
+    /// </summary>
+    /// <param name="uri">The URI to which the response is redirected. Can be null to indicate no redirection.</param>
     void RedirectTo(string? uri);
+    /// <summary>
+    /// Redirects the current request to the specified URI, optionally including additional parameters.
+    /// </summary>
+    /// <param name="uri">The destination URI to redirect to. Cannot be null or empty.</param>
+    /// <param name="parameters">A dictionary containing key-value pairs to include as parameters in the redirect. Can be null if no parameters
+    /// are needed.</param>
     void RedirectTo(string uri, Dictionary<string, object?> parameters);
-
-     /// <summary>
-     /// Редірект на uri з опціональним статус-повідомленням (без HttpContext!)
-     /// </summary>
+    /// <summary>
+    /// Redirects the current response to the specified URI, optionally including a status message.
+    /// </summary>
+    /// <param name="uri">The destination URI to which the response will be redirected. Cannot be null or empty.</param>
+    /// <param name="statusMessage">An optional status message to include with the redirect. If null, no status message is sent.</param>
     void RedirectTo(string uri, string? statusMessage = null);
 
-
+    /// <summary>
+    /// Redirects the response to the current page, causing the client to reload the page.
+    /// </summary>
+    /// <remarks>This method is typically used to refresh the current page after an operation, such as a form
+    /// submission, to prevent duplicate actions if the user reloads the page. The method ends the current response and
+    /// initiates a new request for the same URL.</remarks>
     void RedirectToCurrentPage();
+    /// <summary>
+    /// Redirects the response to the specified URI and includes a status message.
+    /// </summary>
+    /// <param name="uri">The destination URI to which the response will be redirected. Cannot be null or empty.</param>
+    /// <param name="message">The status message to include with the redirect. This message may be displayed to the user or logged, depending
+    /// on implementation.</param>
     void RedirectToWithStatus(string uri, string message);
+    /// <summary>
+    /// Redirects the response to the current page and displays a status message to the user.
+    /// </summary>
+    /// <param name="message">The status message to display on the redirected page. Cannot be null or empty.</param>
     void RedirectToCurrentPageWithStatus(string message);
  
 
@@ -112,7 +140,11 @@ public interface IIdentityAdapter
     /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation.  The task result contains an <see
     /// cref="ApplicationUserDto"/> object with details about the authenticated user.</returns>
     Task<ApplicationUserDto> GetUserInfoAsync();
-
+    /// <summary>
+    /// Asynchronously updates the user information with the specified data.
+    /// </summary>
+    /// <param name="userInfo">An object containing the updated user information. Cannot be null.</param>
+    /// <returns>A task that represents the asynchronous update operation.</returns>
     Task UpdateUserInfoAsync(ApplicationUserDto userInfo);
     /// <summary>
     /// Retrieves the status message stored in the HTTP request cookies.

@@ -4,7 +4,14 @@ using System.Text;
 
 namespace Sabatex.Extensions.Text
 {
-
+    /// <summary>
+    /// Provides an implementation of the Windows-1251 (Cyrillic) character encoding for encoding and decoding byte and
+    /// character arrays.
+    /// </summary>
+    /// <remarks>Windows-1251 is a single-byte character encoding commonly used for Cyrillic script languages.
+    /// This class enables conversion between Unicode characters and their corresponding Windows-1251 byte
+    /// representations. It can be used in scenarios where interoperability with legacy systems or files using
+    /// Windows-1251 encoding is required.</remarks>
     public class Encoding1251 : Encoding
     {
         short[] Windows1251LookupTable =
@@ -47,7 +54,13 @@ namespace Sabatex.Extensions.Text
 
             return win1251Dict[c];
         }
-
+        /// <summary>
+        /// Calculates the number of bytes produced by encoding a set of characters from the specified character array.
+        /// </summary>
+        /// <param name="chars">The character array containing the set of characters to encode.</param>
+        /// <param name="index">The zero-based index of the first character to encode.</param>
+        /// <param name="count">The number of characters to encode.</param>
+        /// <returns>The number of bytes produced by encoding the specified characters.</returns>
         public override int GetByteCount(char[] chars, int index, int count)
         {
             return count;
@@ -72,12 +85,28 @@ namespace Sabatex.Extensions.Text
             }
             return byteIndex - originalByteIndex;
         }
-
+        /// <summary>
+        /// Calculates the number of characters produced by decoding a sequence of bytes starting at the specified
+        /// index.
+        /// </summary>
+        /// <param name="bytes">The byte array containing the sequence of bytes to decode.</param>
+        /// <param name="index">The zero-based index of the first byte to decode.</param>
+        /// <param name="count">The number of bytes to decode.</param>
+        /// <returns>The number of characters that result from decoding the specified bytes.</returns>
         public override int GetCharCount(byte[] bytes, int index, int count)
         {
             return count;
         }
-
+        /// <summary>
+        /// Decodes a sequence of bytes from the specified byte array into a set of characters in the specified
+        /// character array.
+        /// </summary>
+        /// <param name="bytes">The byte array containing the sequence of bytes to decode.</param>
+        /// <param name="byteIndex">The zero-based index in the <paramref name="bytes"/> array at which to begin decoding.</param>
+        /// <param name="byteCount">The number of bytes to decode from <paramref name="bytes"/>.</param>
+        /// <param name="chars">The character array that will contain the resulting set of decoded characters.</param>
+        /// <param name="charIndex">The zero-based index in the <paramref name="chars"/> array at which to begin writing the decoded characters.</param>
+        /// <returns>The actual number of characters written to <paramref name="chars"/>.</returns>
         public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
         {
             for (int i = 0; i < byteCount; i++)
@@ -86,12 +115,20 @@ namespace Sabatex.Extensions.Text
             }
             return byteCount;
         }
-
+        /// <summary>
+        /// Calculates the maximum number of bytes required to encode a specified number of characters.
+        /// </summary>
+        /// <param name="charCount">The number of characters to encode. Must be non-negative.</param>
+        /// <returns>The maximum number of bytes required to encode the specified number of characters.</returns>
         public override int GetMaxByteCount(int charCount)
         {
             return charCount;
         }
-
+        /// <summary>
+        /// Calculates the maximum number of characters produced by decoding the specified number of bytes.
+        /// </summary>
+        /// <param name="byteCount">The number of bytes to decode. Must be non-negative.</param>
+        /// <returns>The maximum number of characters that can be produced by decoding the specified number of bytes.</returns>
         public override int GetMaxCharCount(int byteCount)
         {
             return byteCount;

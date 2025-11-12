@@ -4,21 +4,52 @@ using System;
 using System.Globalization;
 using System.Collections.Generic;
 
-namespace Sabatex.Extensions.ClassExtensions;
-
+namespace Sabatex.Core.ClassExtensions;
+/// <summary>
+/// Provides extension methods for string manipulation, parsing, validation, transliteration, and conversion operations.
+/// </summary>
+/// <remarks>The StringExtension class includes a variety of static extension methods for the string type,
+/// enabling common operations such as parsing substrings, validating character sets, converting between Unicode
+/// representations, and transliterating between Cyrillic and Latin scripts. These methods are designed to simplify
+/// string handling in scenarios involving custom delimiters, language-specific conversions, and numeric parsing. All
+/// methods are implemented as extension methods and can be called directly on string instances.</remarks>
 public static class StringExtension
 {
+    /// <summary>
+    /// Extracts the substring from the start of the input string up to the first occurrence of the specified delimiter,
+    /// trimming any leading or trailing whitespace.
+    /// </summary>
+    /// <remarks>If the delimiter is not found in the input string, the entire trimmed string is returned.
+    /// This method does not throw an exception if the delimiter is missing.</remarks>
+    /// <param name="value">The input string to parse. Can be empty or contain whitespace.</param>
+    /// <param name="delimiter">The character that delimits the substring to extract.</param>
+    /// <returns>A trimmed substring from the start of the input string up to (but not including) the first occurrence of the
+    /// delimiter. Returns an empty string if the input is empty or consists only of whitespace.</returns>
     public static string Parse(this string value, char delimiter)
     {
         if (value.Trim().Length == 0) return "";
         string result = value.Substring(0, value.IndexOf(delimiter)).Trim();
         return result;
     }
+    /// <summary>
+    /// Parses the specified string using the default delimiter.
+    /// </summary>
+    /// <param name="value">The string to parse. Cannot be null.</param>
+    /// <returns>A string representing the parsed result based on the default delimiter.</returns>
     public static string Parse(this string value)
     {
         // Parse on default delimiter
         return value.Parse(';');
     }
+    /// <summary>
+    /// Determines whether all characters in the specified string are contained within a set of allowed characters.
+    /// </summary>
+    /// <remarks>This method performs a case-sensitive comparison. If <paramref name="value"/> is empty, the
+    /// method returns true.</remarks>
+    /// <param name="value">The string to validate. Each character in this string is checked against the set of allowed characters.</param>
+    /// <param name="check">A string containing the set of allowed characters. Each character in <paramref name="value"/> must exist in this
+    /// string.</param>
+    /// <returns>true if every character in <paramref name="value"/> is found in <paramref name="check"/>; otherwise, false.</returns>
     public static bool CheckString(this string value, string check)
     {
         foreach (char c in value)
@@ -51,7 +82,15 @@ public static class StringExtension
         }
         return result;
     }
-
+    /// <summary>
+    /// Converts each character in the specified string to its corresponding uppercase Russian character, if applicable.
+    /// </summary>
+    /// <remarks>This method is an extension method for the <see cref="string"/> type. If the input string
+    /// contains characters that do not have a Russian uppercase equivalent, those characters are left
+    /// unchanged.</remarks>
+    /// <param name="value">The input string to convert. Cannot be null.</param>
+    /// <returns>A new string in which each character has been converted to its uppercase Russian equivalent. Characters without
+    /// a Russian mapping remain unchanged.</returns>
     public static string ToRussian(this string value)
     {
         StringBuilder s = new StringBuilder(value);
@@ -61,6 +100,14 @@ public static class StringExtension
         }
         return s.ToString();
     }
+    /// <summary>
+    /// Converts the characters in the specified string to their Ukrainian equivalents using a predefined mapping.
+    /// </summary>
+    /// <remarks>Characters that do not have a Ukrainian equivalent in the mapping remain unchanged in the
+    /// returned string.</remarks>
+    /// <param name="value">The input string to convert. Cannot be null.</param>
+    /// <returns>A new string in which each character from the input has been replaced with its Ukrainian equivalent. If the
+    /// input string is empty, returns an empty string.</returns>
     public static string ToUkrainian(this string value)
     {
         StringBuilder s = new StringBuilder(value);
@@ -71,7 +118,13 @@ public static class StringExtension
         return s.ToString();
     }
 
-
+    /// <summary>
+    /// Converts each character in the specified string to its Unicode code point and returns a comma-separated string
+    /// of these numeric values.
+    /// </summary>
+    /// <param name="value">The input string whose characters are to be converted. Can be null.</param>
+    /// <returns>A comma-separated string of numeric Unicode code points representing each character in the input string. Returns
+    /// an empty string if the input is null.</returns>
     public static string ToHeximal(this string value)
     {
         StringBuilder result = new StringBuilder();
@@ -86,14 +139,21 @@ public static class StringExtension
         return result.ToString();
 
     }
-
+    /// <summary>
+    /// Converts a comma-separated string of 16-bit unsigned integer values to their corresponding Unicode characters
+    /// and returns the resulting string.
+    /// </summary>
+    /// <param name="value">A string containing comma-separated 16-bit unsigned integer values representing Unicode code points.</param>
+    /// <returns>A string composed of the Unicode characters corresponding to the parsed integer values. Returns an empty string
+    /// if the input is null.</returns>
+    /// <exception cref="Exception">Thrown if any of the comma-separated values cannot be parsed as a valid 16-bit unsigned integer.</exception>
     public static string FromHeximal(this string value)
     {
         StringBuilder result = new StringBuilder();
-        if (value != null)
+        var st = value?.ToStringCollection(',');
+        if (st != null)
         {
-            var st = value.ToStringCollection(',');
-            foreach (string s in st)
+            foreach (var s in st)
             {
                 if (UInt16.TryParse(s, out ushort rs))
                     result.Append((char)rs);
@@ -253,7 +313,16 @@ public static class StringExtension
         "ya",//Я Ya
     };
 
-
+    /// <summary>
+    /// Transliterates a Ukrainian string to its Latin-script representation according to official Ukrainian
+    /// transliteration rules.
+    /// </summary>
+    /// <remarks>This method is intended for converting Ukrainian Cyrillic text to Latin characters, following
+    /// the official Ukrainian transliteration standard. Non-Ukrainian characters are preserved as-is in the
+    /// output.</remarks>
+    /// <param name="value">The input string containing Ukrainian text to be transliterated.</param>
+    /// <returns>A string containing the Latin-script transliteration of the input. If the input is empty, returns an empty
+    /// string.</returns>
     public static string TranslitFromUkraineToLatin(this string value)
     {
         

@@ -13,8 +13,20 @@ namespace Sabatex.Core.Identity;
 /// about whether the sign-in was successful, requires additional steps, or failed due to specific conditions.</remarks>
 public enum SignInStatus
 {
+    /// <summary>
+    /// Indicates that the operation completed successfully.
+    /// </summary>
     Success,
+    /// <summary>
+    /// Gets or sets a value indicating whether two-factor authentication is required for the user or operation.
+    /// </summary>
     RequiresTwoFactor,
+    /// <summary>
+    /// Gets or sets a value indicating whether the user account is locked out.
+    /// </summary>
     LockedOut,
+    /// <summary>
+    /// Indicates that the provided credentials are invalid.
+    /// </summary>
     InvalidCredentials
 }

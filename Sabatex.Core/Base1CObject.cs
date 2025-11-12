@@ -2,7 +2,7 @@
 
 namespace sabatex.BakeryWebApp.Models;
 
-// <summary>
+/// <summary>
 /// Base abstract class that provides a primary key and soft deletion support.
 /// Common ancestor for all 1C-compatible business entities.
 /// </summary>

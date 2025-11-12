@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using Sabatex.Extensions.ClassExtensions;
+using Sabatex.Core.ClassExtensions;
 
-namespace Sabatex.Extensions.Tests;
+namespace Sabatex.Core.Tests;
 
 public class CharExtensionsTests
 {

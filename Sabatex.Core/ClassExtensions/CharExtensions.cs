@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 
-namespace Sabatex.Extensions.ClassExtensions;
+namespace Sabatex.Core.ClassExtensions;
 
 /// <summary>
 /// The conversion latin symbols to ukrainian (russian) for keyboard
@@ -11,11 +11,10 @@ namespace Sabatex.Extensions.ClassExtensions;
 public static class CharExtensions
 {
     /// <summary>
-    /// Перетворює латинський символ на російський який знаходиться на тій самій клавіші
     /// Converts a Latin character to the corresponding Russian character on the same key
     /// </summary>
-    /// <param name="value">Latin character (латинський символ)</param>
-    /// <returns>Russian character (російський символ)</returns>
+    /// <param name="value">Latin character</param>
+    /// <returns>Russian character</returns>
     public static char UpperKeyToRus(this char value)
     {
         char k = Char.ToUpper(value,CultureInfo.CurrentCulture);
@@ -66,10 +65,9 @@ public static class CharExtensions
     }
     /// <summary>
     /// Converts a Latin character to the corresponding Ukrainian character on the same key
-    /// Перетворює латинський символ на Український який знаходиться на тій самій клавіші
     /// </summary>
-    /// <param name="value">Latin character (латинський символ)</param>
-    /// <returns>Ukrainian character (Український символ)</returns>
+    /// <param name="value">Latin character</param>
+    /// <returns>Ukrainian character</returns>
     public static char UpperKeyToUkraine(this char value)
     {
         char k = Char.ToUpper(value, CultureInfo.CurrentCulture);
