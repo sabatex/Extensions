@@ -21,12 +21,5 @@ This library contains common definitions and utilities that are used across all 
  - #MemberInfo extensions: GetCustomAttribute(Type attributeType) 
 
  - #Period Represents a dates period (start - end)
- - 
- - #UInt128 Represents a 128-bit unsigned integer
-
- 3.1.7
-     - set readonly struct UInt128
- 3.1.6 -
-      - change Target Framework from 2.0 to 2.1
-      - add MinValue to UInt128
-
+ 
+ 
