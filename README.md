@@ -1,8 +1,9 @@
-# .NET Core Extensions
+## Sabatex base common definitions for all libraries
+This library contains common definitions and utilities that are used across all Sabatex libraries. It is designed to provide a shared foundation for the Sabatex ecosystem, ensuring consistency and reusability of code.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/sabatex/Extensions/blob/master/LICENSE.TXT)
-[![NuGet Version](https://img.shields.io/nuget/v/Sabatex.Extensions?label=version&logo=nuget&style=social&label=)](https://www.nuget.org/packages/Sabatex.Extensions)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Sabatex.Extensions?color=%232694F9&label=downloads&logo=nuget&style=social)](https://www.nuget.org/packages/Sabatex.Extensions)
+[![NuGet Version](https://img.shields.io/nuget/v/Sabatex.Core?label=version&logo=nuget&style=social&label=)](https://www.nuget.org/packages/Sabatex.Core)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Sabatex.Core?color=%232694F9&label=downloads&logo=nuget&style=social)](https://www.nuget.org/packages/Sabatex.Core)
 
 
  - #Observable object with INotifyPropertyChanged implemented
